@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             
+             template="../usuario/template.xhtml">
+
+    <h:form id="buffet">
+        <p:fieldset legend="Buffet">
+            <h:panelGrid columns="3" cellpadding="5">
+
+                <p:outputLabel for="valor" value="Valor:" />
+                <p:inputText id="valor" value="#{buffetBean.buffet.valorTotalGasto}">
+                    <f:validateDoubleRange minimum="0.0"/>
+                </p:inputText>
+                <p:message for="valor" id="messageValorGasto" severity="error"/>
+
+            </h:panelGrid>   
+
+            <p:toolbarGroup>
+                <p:commandButton action="#{buffetBean.salvar()}" value="Salvar" ajax="false" update="@form" 
+                                 title="Salvar" icon="ui-icon-check" validateClient="true"/>
+                <p:commandButton value="Listar" immediate="true" action="#{buffetBean.listar()}" update="@form" ajax="false"/>
+                <h:commandButton action="editarBuffet" immediate="true" value="Editar" />
+            </p:toolbarGroup>
+        </p:fieldset>
+
+    </h:form>
+    <h:form id="buffetListar"> 
+        <p:fieldset legend="Buffets cadastrados">
+            <p:dataTable value="#{buffetBean.buffets}" var="buffet">
+                <p:column headerText="Opções">
+                    <p:commandButton id="deletar" value="Deletar" ajax="false" immediate="true" action="#{buffetBean.remover(buffet)}" update="@form"></p:commandButton>
+                </p:column>
+                <p:column headerText="Valor" sortBy="#{buffet.valorTotalGasto}">
+                    <h:outputText value="#{buffet.valorTotalGasto}"></h:outputText>
+                </p:column>
+                <p:column headerText="Cerimonia" sortBy="#{buffet.cerimonia}">
+                    <h:outputText value="#{buffet.cerimonia.dataHora}"></h:outputText>
+                </p:column>
+                <p:column headerText="Comes e Bebes" >
+                    <p:selectOneMenu id="comesBebes" >
+                        <f:selectItems value="#{buffet.comesBebes}" var="comesBebes" itemValue="#{comesBebes}" itemLabel="#{comesBebes.produto}"  />
+                    </p:selectOneMenu> 
+                </p:column>
+            </p:dataTable>
+        </p:fieldset>
+    </h:form>
+</ui:decorate>

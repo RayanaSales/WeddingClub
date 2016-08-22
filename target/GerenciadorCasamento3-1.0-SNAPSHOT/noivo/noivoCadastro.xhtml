@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+             template="../usuario/template.xhtml"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form id="noivo">
+        <p:fieldset legend="Noivo">
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="nome" value="Nome:" />
+                <p:inputText id="nome" value="#{noivoBean.noivo.nome}"/>
+                <p:message for="nome" id="messageNome" severity="error"/>
+
+                <p:outputLabel for="email" value="Email:" />
+                <p:inputText id="email" value="#{noivoBean.noivo.email}"/>
+                <p:message for="email" id="messageEmail" severity="error"/>
+
+                <p:outputLabel for="senha" value="Senha:" />
+                <p:password id="senha" value="#{noivoBean.noivo.senha}" feedback="true"/>
+                <p:message for="senha" id="messageSenha" severity="error"/>
+
+                <p:outputLabel for="cerimonia" value="Cerimônia :"/>
+                <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{noivoBean.noivo.cerimonia}">
+                    <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao.rua} nº #{cerimonia.localizacao.numero} - #{cerimonia.dataHora}"  />
+                </p:selectOneMenu>
+                <br/>
+
+            </h:panelGrid>   
+
+            <p:toolbarGroup>
+                <p:commandButton action="#{noivoBean.salvar()}" value="Salvar" ajax="false" update="@form" 
+                                 title="Salvar" icon="ui-icon-check" validateClient="false"/>
+                <p:commandButton value="Listar" immediate="true" action="#{noivoBean.listar()}" update="@form" ajax="false"/>
+                <h:commandButton action="editarNoivo" immediate="true" value="Editar" />
+            </p:toolbarGroup>
+        </p:fieldset>
+    </h:form>
+
+    <h:form id="noivoListar">        
+        <p:fieldset legend="Noivos cadastrados">
+            <p:dataTable value="#{noivoBean.noivos}" var="noivo">
+                <p:column headerText="Opções">
+                    <p:commandButton id="deletar" value="Deletar" immediate="true" action="#{noivoBean.remover(noivo)}" update="@form"></p:commandButton>                   
+                </p:column>
+                <p:column headerText="Nome" sortBy="#{noivo.nome}">
+                    <h:outputText value="#{noivo.nome}"></h:outputText>
+                </p:column>
+                <p:column headerText="Email" sortBy="#{noivo.email}">
+                    <h:outputText value="#{noivo.email}"></h:outputText>
+                </p:column> 
+                <p:column headerText="Senha" sortBy="#{noivo.senha}">
+                    <h:outputText value="#{noivo.senha}"></h:outputText>
+                </p:column>
+                <p:column headerText="Cerimonia" >
+                    <h:outputText value="#{noivo.cerimonia.dataHora}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="Telefones" >
+                    <p:selectOneMenu id="telefone" value="#{noivo.telefones}">
+                        <f:selectItems value="#{noivo.telefones}" var="telefone" itemValue="#{telefone}" itemLabel="#{telefone.numero}"  />
+                    </p:selectOneMenu> 
+                </p:column> 
+
+                <p:column headerText="Roupas" >
+                    <p:selectOneMenu id="roupas" value="#{noivo.roupaDosNoivos}">
+                        <f:selectItems value="#{noivo.roupaDosNoivos}"  />
+                    </p:selectOneMenu> 
+                </p:column>
+
+            </p:dataTable>            
+        </p:fieldset>
+    </h:form>
+</ui:decorate>

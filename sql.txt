@@ -1,0 +1,157 @@
+create table localizacao
+(
+	id serial primary key,
+	txt_logradouro varchar(100),
+        txt_complemento varchar(100),
+	txt_bairro varchar(100),
+	txt_cep varchar(100),
+        txt_cidade varchar(100),
+        estado varchar(5),
+	numero_numero int
+);
+
+create table buffet
+(
+	id serial primary key,
+	numero_valorTotal real NOT NULL
+);
+
+create table cerimonia
+(
+	id serial primary key,
+	dt_dataHora timestamp NOT NULL,
+
+	id_localizacao int references localizacao(id),
+	id_buffet int references buffet(id)
+);
+
+create table pessoa
+(
+        id serial primary key,
+        disc_pessoa varchar(1),
+        txt_nome varchar(100),
+	txt_email varchar(100),
+	txt_senha varchar(500),
+	numero_numeroAleatorio int,
+
+        id_cerimonia int references cerimonia(id)
+);
+
+create table produtorDeMidia
+(
+	numero_preco real,
+        categoria varchar(30),
+	txt_linkParaRedeSocial varchar(100),
+
+        id_pessoa int references pessoa(id)
+);
+
+create table presente
+(
+	id serial primary key,
+	txt_nome varchar(50) NOT NULL,
+	txt_descricao varchar(50),
+	txt_ondeEncontrar varchar(50),
+	id_cerimonia int references cerimonia(id)
+);
+
+create table noivo
+(	
+        id_pessoa int references pessoa(id)
+);
+
+create table convidado
+(
+        categoria varchar(30) NOT NULL,
+        numero_quantidadeSenhas int NOT NULL ,
+
+        id_pessoa int references pessoa(id)
+);
+
+create table telefone
+(
+	id serial primary key,
+	categoria varchar(30) NOT NULL,
+	txt_ddd varchar(5) NOT NULL,
+	txt_numero varchar(15) NOT NULL,
+
+        id_pessoa int references pessoa(id)
+);
+
+create table loja
+(
+	id serial primary key,
+	txt_nome varchar(50) NOT NULL,
+        txt_cnpj varchar(14) NOT NULL,
+
+	id_localizacao int references localizacao(id),
+	id_telefone int references telefone(id),
+        id_presente int references presente(id)
+);
+
+create table comesBebes
+(
+        id serial  primary key,
+        txt_produto varchar(100) NOT NULL,
+        numero_quantidade int NOT NULL,
+        numero_valor real NOT NULL,
+        categoria varchar(10) NOT NULL,
+
+        id_buffet int references buffet(id),
+        id_loja int references loja(id)
+);
+
+create table roupaDosNoivos
+(
+    id serial primary key,
+    txt_roupa varchar(50) NOT NULL,
+    numero_valor real NOT NULL,
+    id_pessoa int references pessoa(id)
+);
+
+create table grupo
+(
+	id serial primary key,
+	txt_nome varchar(20) NOT NULL
+);
+
+create table pessoa_grupo
+(
+	id_pessoa int references pessoa(id),
+	id_grupo int references grupo(id)
+);
+
+INSERT INTO grupo (txt_nome) VALUES ('noivo');  
+INSERT INTO grupo (txt_nome) VALUES ('produtorDeMidia');
+INSERT INTO grupo (txt_nome) VALUES ('convidado');
+INSERT INTO grupo (txt_nome) VALUES ('usuario');
+
+CREATE SEQUENCE GRUPO_SEQUENCE INCREMENT BY 1
+    MINVALUE 1 MAXVALUE 99999999 START WITH 1;
+
+CREATE SEQUENCE PESSOA_SEQUENCE INCREMENT BY 1
+    MINVALUE 1 MAXVALUE 99999999 START WITH 1;
+
+CREATE SEQUENCE PRESENTE_SEQUENCE INCREMENT BY 1
+   MINVALUE 1 MAXVALUE 99999999 START WITH 1;
+
+CREATE SEQUENCE LOJA_SEQUENCE INCREMENT BY 1
+   MINVALUE 1 MAXVALUE 99999999 START WITH 1;
+
+CREATE SEQUENCE CERIMONIA_SEQUENCE INCREMENT BY 1
+   MINVALUE 1 MAXVALUE 99999999 START WITH 1;
+
+CREATE SEQUENCE TELEFONE_SEQUENCE INCREMENT BY 1
+   MINVALUE 1 MAXVALUE 99999999 START WITH 1;
+
+CREATE SEQUENCE LOCALIZACAO_SEQUENCE INCREMENT BY 1
+   MINVALUE 1 MAXVALUE 99999999 START WITH 1;
+
+CREATE SEQUENCE BUFFET_SEQUENCE INCREMENT BY 1
+   MINVALUE 1 MAXVALUE 99999999 START WITH 1;
+
+CREATE SEQUENCE COMESBEBES_SEQUENCE INCREMENT BY 1
+   MINVALUE 1 MAXVALUE 99999999 START WITH 1;
+
+CREATE SEQUENCE ROUPADOSNOIVOS_SEQUENCE INCREMENT BY 1
+   MINVALUE 1 MAXVALUE 99999999 START WITH 1;

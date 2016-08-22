@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+             template="menu_convidado.xhtml"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form id="convidado">
+        <p:fieldset legend="Convidado">
+             <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="nome" value="Nome:" />
+                <p:inputText id="nome" value="#{convidadoBean.convidado.nome}"/>
+                <p:message for="nome" id="messageDatetime" severity="error"/>
+
+                <p:outputLabel for="email" value="Email:" />
+                <p:inputText id="email" value="#{convidadoBean.convidado.email}"/>
+                <p:message for="email" id="messageEmail" severity="error"/>
+
+                <p:outputLabel for="quantidadeSenhas" value="Quantidade de senhas: " />
+                <p:inputMask id="quantidadeSenhas" value="#{convidadoBean.convidado.quantidadeSenhas}" mask="9?9"/>
+                <p:message for="quantidadeSenhas" id="messageSenhas" severity="error"/>
+
+                <p:outputLabel for="cerimonia" value="Cerimônia :"/>
+                <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{convidadoBean.convidado.cerimonia}">
+                    <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao.rua} nº #{cerimonia.localizacao.numero} - #{cerimonia.dataHora}"  />
+                </p:selectOneMenu>
+
+                <br/>
+                <p:outputLabel for="categoria" value="Categoria: " />
+                <p:selectOneMenu id="categoria" value="#{convidadoBean.convidado.categoria}">
+                    <f:selectItems value="#{convidadoBean.categorias}"   />
+                </p:selectOneMenu>
+
+            </h:panelGrid>   
+
+            <p:toolbarGroup>
+                <p:commandButton value="Listar" action="#{convidadoBean.listar()}" update="@form" ajax="false"/>
+            </p:toolbarGroup>
+        </p:fieldset>
+
+        <br/>
+        <p:fieldset legend="Noivos cadastrados">
+            <p:dataTable value="#{convidadoBean.convidados}" var="convidado">
+                <p:column headerText="Opções">
+                    <p:commandButton id="editar" ajax="false" value="Editar" action="#{convidadoBean.editar(convidado.id)}" update="@form"></p:commandButton>
+                </p:column>                
+                <p:column headerText="Nome" sortBy="#{convidado.nome}">
+                    <h:outputText value="#{convidado.nome}"></h:outputText>
+                </p:column> 
+                <p:column headerText="Email" sortBy="#{convidado.email}">
+                    <h:outputText value="#{convidado.email}"></h:outputText>
+                </p:column> 
+                <p:column headerText="Categoria" sortBy="#{convidado.categoria}">
+                    <h:outputText value="#{convidado.categoria}"></h:outputText>
+                </p:column> 
+                <p:column headerText="Quantidade de senhas" sortBy="#{convidado.quantidadeSenhas}">
+                    <h:outputText value="#{convidado.quantidadeSenhas}"></h:outputText>
+                </p:column> 
+                <p:column headerText="Cerimonia" >
+                    <h:outputText value="#{convidado.cerimonia.dataHora}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="Telefones" >
+                    <p:selectOneMenu id="telefone" value="#{convidado.telefones}">
+                        <f:selectItems value="#{convidado.telefones}" var="telefone" itemValue="#{telefone}" itemLabel="#{telefone.numero}"  />
+                    </p:selectOneMenu> 
+                </p:column>
+            </p:dataTable>
+        </p:fieldset>
+    </h:form>
+</ui:decorate>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="casamento" transaction-type="JTA">
+    <jta-data-source>java:app/jdbc/Casamento</jta-data-source>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="eclipselink.logging.level" value="FINE"/>
+      <property name="eclipselink.weaving" value="static"/>
+	  <!-- Usamos isso para habilitar a funcao lazy no eclipse link, usando o maven -->
+      <!-- Sem o eclipselink.weaving dava um erro: Reverting the lazy setting on the OneToOne or ManyToOne attribute (q usava os relacionamentos), since weaving was not enabled or did not occur. -->
+      <!-- eclipselink.weaving foi static pq usamos o maven, se fosse dinamico, teriamos que referenciar o .jar no buildpath, sendo static configuramos com o plug in no pom.xml-->
+    </properties>
+  </persistence-unit>
+</persistence>

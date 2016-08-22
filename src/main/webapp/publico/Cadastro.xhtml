@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Wedding club</title>
+    </h:head>
+    <h:body>
+
+        <!--        <h:panelGrid columns="2">
+                    <h:graphicImage library="imagens" name="ring1.jpg" width="100px"/>
+                    <h1>Wedding club - cadastro inicial</h1>
+                </h:panelGrid>
+
+                <h:form>
+                    <p:growl id="growl" autoUpdate="true" globalOnly="true" showDetail="true" life="4000" severity="info, warn"/>
+                    <p:menubar>
+                        <p:menuitem value="Noivo" url="/faces/publico/cadastroInicialNoivo.xhtml"></p:menuitem>
+                        <p:menuitem value="Produtor" url="/faces/publico/cadastroInicialProdutor.xhtml"></p:menuitem>
+                        <p:menuitem value="Convidado" url="/faces/publico/cadastroInicialConvidado.xhtml"></p:menuitem>
+                    </p:menubar>
+                </h:form>
+                <hr/>
+                <ui:insert></ui:insert>-->
+
+        <p:growl showDetail="false" globalOnly="true"  autoUpdate="true" />
+        <p:tabView id="abas">
+            <p:tab title="Cadastrar noivo">
+                <h:form>
+                    <p:fieldset legend="Dados noivo">
+                        <p:panelGrid columns="3">
+
+                            <p:outputLabel for="primeiroNome">Nome</p:outputLabel>
+                            <p:inputText id="primeiroNome" requiredMessage="Campo obrigatório" value="#{noivoBean.noivo.nome}" required="true">
+                                <f:validateLength minimum="3" maximum="30"/>
+                                <f:ajax execute="primeiroNome" render="messagePrimeiroNome" />
+                            </p:inputText>
+                            <p:message for="primeiroNome" id="messagePrimeiroNome"/>
+
+                            <p:outputLabel for="email">E-mail</p:outputLabel>
+                            <p:inputText id="email" requiredMessage="Campo obrigatório" value="#{noivoBean.noivo.email}" required="true">
+                                <f:validateLength minimum="5" maximum="30"/>
+                                <f:ajax execute="email" render="messageEmail" />
+                            </p:inputText>
+                            <p:message for="email" id="messageEmail"/>
+
+                            <p:outputLabel value="Senha" />
+                            <p:password feedback="true" value="#{noivoBean.noivo.senha}" requiredMessage="Campo obrigatório" id="senha" weakLabel="#{mensagem.senhaFraca}"
+                                        goodLabel="#{mensagem.senhaBoa}" strongLabel="#{mensagem.senhaForte}" promptLabel="Informe a senha" required="true"/>
+                            <p:message for="senha" id="messageSenha" />
+
+                        </p:panelGrid>
+                        <p:separator />
+                        <p:commandButton action="#{noivoBean.salvar()}" value="Cadastrar"
+                                         process="@form"/>
+                    </p:fieldset>
+                </h:form>
+            </p:tab>
+
+
+            <p:tab title="Cadastrar produtor">
+                <h:form>
+                    <p:fieldset legend="Dados produtor">
+                        <p:panelGrid columns="3">
+
+                            <p:outputLabel for="primeiroNome">Nome</p:outputLabel>
+                            <p:inputText id="primeiroNome" requiredMessage="Campo obrigatório" value="#{produtorDeMidiaBean.produtor.nome}" required="true">
+                                <f:validateLength minimum="3" maximum="30"/>
+                                <f:ajax execute="primeiroNome" render="messagePrimeiroNome" />
+                            </p:inputText>
+                            <p:message for="primeiroNome" id="messagePrimeiroNome"/>
+
+                            <p:outputLabel for="email">E-mail</p:outputLabel>
+                            <p:inputText id="email" requiredMessage="Campo obrigatório" value="#{produtorDeMidiaBean.produtor.email}" required="true">
+                                <f:validateLength minimum="5" maximum="30"/>
+                                <f:ajax execute="email" render="messageEmail" />
+                            </p:inputText>
+                            <p:message for="email" id="messageEmail"/>
+
+                            <p:outputLabel for="url">Link para rede social</p:outputLabel>
+                            <p:inputText id="url" requiredMessage="Campo obrigatório" value="#{produtorDeMidiaBean.produtor.linkParaRedeSocial}" required="true">
+                                <f:validateLength minimum="5" maximum="30"/>
+                                <f:ajax execute="url" render="messageURL" />
+                            </p:inputText>
+                            <p:message for="url" id="messageURL"/>
+
+                            <p:outputLabel for="valor">Valor da hora/serviço</p:outputLabel>
+                            <p:inputText id="valor" value="#{produtorDeMidiaBean.produtor.preco}" required="true">
+                                <f:validateDoubleRange minimum="0.0"/>
+                                <f:ajax execute="valor" render="messageValor" />
+                            </p:inputText>
+                            <p:message for="valor" id="messageValor"/>
+
+                            <p:outputLabel for="categoria">Categoria</p:outputLabel>
+                            <p:selectOneMenu id="categoria" value="#{produtorDeMidiaBean.produtor.categoria}" required="true">
+                                <f:selectItems value="#{produtorDeMidiaBean.categorias}"   />
+                            </p:selectOneMenu>
+                            <p:message for="categoria" id="messageCategoria" />
+
+                            <p:outputLabel value="Senha" />
+                            <p:password feedback="true" value="#{produtorDeMidiaBean.produtor.senha}" requiredMessage="Campo obrigatório" id="senha" weakLabel="#{mensagem.senhaFraca}"
+                                        goodLabel="#{mensagem.senhaBoa}" strongLabel="#{mensagem.senhaForte}" promptLabel="Informe a senha" required="true"/>
+                            <p:message for="senha" id="messageSenha" />
+
+                        </p:panelGrid>
+                        <p:separator />
+                        <p:commandButton action="#{produtorDeMidiaBean.salvar()}" value="Cadastrar"
+                                         process="@form"/>
+                    </p:fieldset>
+                </h:form>
+            </p:tab>
+
+
+
+
+            <p:tab title="Cadastrar convidado">
+                <h:form>
+                    <p:fieldset legend="Dados convidado">
+                        <p:panelGrid columns="3">
+
+                            <p:outputLabel for="primeiroNome">Nome</p:outputLabel>
+                            <p:inputText id="primeiroNome" requiredMessage="Campo obrigatório" value="#{convidadoBean.convidado.nome}" required="true">
+                                <f:validateLength minimum="3" maximum="30"/>
+                                <f:ajax execute="primeiroNome" render="messagePrimeiroNome" />
+                            </p:inputText>
+                            <p:message for="primeiroNome" id="messagePrimeiroNome"/>
+
+                            <p:outputLabel for="email">E-mail</p:outputLabel>
+                            <p:inputText id="email" requiredMessage="Campo obrigatório" value="#{convidadoBean.convidado.email}" required="true">
+                                <f:validateLength minimum="5" maximum="30"/>
+                                <f:ajax execute="email" render="messageEmail" />
+                            </p:inputText>
+                            <p:message for="email" id="messageEmail"/>
+
+                            <p:outputLabel for="quantidadeSenhas">Quantidade de senhas</p:outputLabel>
+                            <p:inputMask id="quantidadeSenhas" value="#{convidadoBean.convidado.quantidadeSenhas}" mask="9?9" required="true"/>
+                            <p:message for="quantidadeSenhas" id="messageSenhas"/>
+
+                            <p:outputLabel for="categoria">Convidado</p:outputLabel>
+                            <p:selectOneMenu id="categoria" value="#{convidadoBean.convidado.categoria}" required="true">
+                                <f:selectItems value="#{convidadoBean.categorias}"   />
+                            </p:selectOneMenu>
+                            <p:message for="categoria" id="messageConvidado"/>
+
+                            <p:outputLabel value="Senha" />
+                            <p:password feedback="true" value="#{convidadoBean.convidado.senha}" requiredMessage="Campo obrigatório" id="senha" weakLabel="#{mensagem.senhaFraca}"
+                                        goodLabel="#{mensagem.senhaBoa}" strongLabel="#{mensagem.senhaForte}" promptLabel="Informe a senha" required="true"/>
+                            <p:message for="senha" id="messageSenha" />
+
+                        </p:panelGrid>
+                        <p:separator />
+                        <p:commandButton action="#{convidadoBean.salvar()}" value="Cadastrar"
+                                         process="@form"/>
+                    </p:fieldset>
+                </h:form>
+            </p:tab>
+
+        </p:tabView>
+    </h:body>
+</html>

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form id="telefone">
+        <p:fieldset legend="Telefone">
+            <h:panelGrid columns="3" cellpadding="5">
+
+                <p:outputLabel for="ddd" value="Ddd:" />
+                <p:inputMask id="ddd" value="#{telefoneBean.telefone.ddd}" mask="99"/>
+                <p:message for="ddd" id="messageDdd" severity="error"/>
+
+                <p:outputLabel for="phone" value="Phone:" />
+                <p:inputMask id="phone" value="#{telefoneBean.telefone.numero}" mask="39999999"/>
+                <p:message for="phone" id="messageFone" severity="error"/>
+
+                <p:outputLabel for="categoria" value="Categoria:" />
+
+                <p:selectOneMenu id="categoria" value="#{telefoneBean.telefone.categoria}">
+                    <f:selectItems value="#{telefoneBean.categorias}"   />
+                </p:selectOneMenu>
+
+            </h:panelGrid>                
+
+            <p:toolbarGroup>
+                <p:commandButton value="Listar" action="#{telefoneBean.listar()}" immediate="true" update="@form"></p:commandButton>
+            </p:toolbarGroup>
+
+        </p:fieldset>
+
+        <br/>
+        <p:fieldset legend="Telefones cadastrados">
+
+            <p:dataTable value="#{telefoneBean.buscarTelefonesFixos()}" var="telefone">
+                <p:column headerText="Opções">
+                    <p:commandButton id="editar" value="Editar" action="#{telefoneBean.editar(telefone.id)}" update="@form"></p:commandButton>
+                </p:column>
+                <p:column headerText="ddd" sortBy="#{telefone.ddd}">
+                    <h:outputText value="#{telefone.ddd}"></h:outputText>
+                </p:column>
+                <p:column headerText="numero" sortBy="#{telefone.numero}">
+                    <h:outputText value="#{telefone.numero}"></h:outputText>
+                </p:column>
+                <p:column headerText="Categoria" sortBy="#{telefone.categoria}">
+                    <h:outputText value="#{telefone.categoria}"></h:outputText>
+                </p:column>   
+            </p:dataTable>
+        </p:fieldset>
+    </h:form>
+</ui:decorate>

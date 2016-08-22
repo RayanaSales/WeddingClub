@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             
+             template="template.xhtml">
+             
+
+    <h:form id="celular">
+        <p:fieldset legend="Celular">
+
+            <h:panelGrid columns="3" cellpadding="5">
+
+                <p:outputLabel for="ddd" value="Ddd:" />
+                <p:inputMask id="ddd" value="#{telefoneBean.telefone.ddd}" mask="99"/>
+                <p:message for="ddd" id="messageDdd" severity="error"/>
+
+                <p:outputLabel for="phone" value="Phone:" />
+                <p:inputMask id="phone" value="#{telefoneBean.telefone.numero}" mask="999999999"/>
+                <p:message for="phone" id="messageFone" severity="error"/>
+                         
+                <p:outputLabel for="pessoa" value="Pessoa:" />
+                <p:selectOneMenu id="pessoa" converter="pessoaConverter" value="#{telefoneBean.telefone.pessoa}">
+                    <f:selectItems value="#{pessoaBean.pessoas}" var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.nome}"  />
+                </p:selectOneMenu>
+            </h:panelGrid>                
+
+            <p:toolbarGroup>
+                <p:commandButton action="#{telefoneBean.salvar()}" value="Salvar" ajax="true" update="@form" 
+                                 title="Salvar" icon="ui-icon-check" validateClient="true"/>
+                <p:commandButton value="Listar" action="#{telefoneBean.listar()}" update="@form"></p:commandButton>
+                <h:commandButton action="editarCelular" immediate="true" value="Editar" />
+            </p:toolbarGroup>
+        </p:fieldset>
+
+    </h:form>
+    <h:form id="celularListar"> 
+        <p:fieldset legend="Celulares cadastrados">
+            <p:dataTable value="#{telefoneBean.buscarTelefonesCelulares()}" var="telefone">
+                <p:column headerText="Opções">
+                    <p:commandButton id="deletar" immediate="true" value="Deletar" action="#{telefoneBean.remover(telefone)}" update="@form"></p:commandButton>
+                </p:column>
+                <p:column headerText="ddd" sortBy="#{telefone.ddd}">
+                    <h:outputText value="#{telefone.ddd}"></h:outputText>
+                </p:column>
+                <p:column headerText="numero" sortBy="#{telefone.numero}">
+                    <h:outputText value="#{telefone.numero}"></h:outputText>
+                </p:column>
+                <p:column headerText="Categoria" sortBy="#{telefone.categoria}">
+                    <h:outputText value="#{telefone.categoria}"></h:outputText>
+                </p:column>   
+                <p:column headerText="Pessoa" sortBy="#{telefone.pessoa.nome}">
+                    <h:outputText value="#{telefone.pessoa.nome}"></h:outputText>
+                </p:column> 
+            </p:dataTable>
+        </p:fieldset>
+
+    </h:form>
+
+</ui:decorate>

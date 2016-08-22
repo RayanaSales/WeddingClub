@@ -1,0 +1,34 @@
+entidades.Telefone.categoria = Categoria telefone invalida.
+entidades.Telefone.ddd = Insira um ddd valido.
+entidades.Telefone.numero = Os numeros devem comecar com 9, 8, 7 ou 3.
+
+entidades.Pessoa.nome = Deve possuir apenas letras, no maximo 1 maiuscula. Minimo:3 Max: 40.
+entidades.Pessoa.email = Deve possuir: texto + @ + texto + . + texto. Pode ter numeros. Min: 5 Max: 40
+entidades.Pessoa.senha = A senha deve estar entre 6 e 16 caracteres.
+
+entidades.Buffet.valorTotalGasto = Insira numeros.
+
+entidades.ComesBebes.produto = Deve possuir apenas letras, no maximo 1 maiuscula. Minimo:3 Max: 40.
+
+entidades.Localizacao.logradouro = Deve possuir apenas letras, no maximo 1 maiuscula.Minimo:3 Max: 40.
+entidades.Localizacao.bairro = Deve possuir apenas letras, no maximo 1 maiuscula. Minimo:3 Max: 40.
+entidades.Localizacao.cidade = Deve possuir apenas letras, no maximo 1 maiuscula. Minimo:3 Max: 40.
+entidades.Localizacao.complemento = Deve possuir apenas letras, no maximo 1 maiuscula. Minimo:3 Max: 40.
+entidades.Localizacao.cep = Insira 8 numeros.
+entidades.Convidado.cep = Deve possuir apenas nuameros de 0 a 9. Minimo:3 Max: 40.
+entidades.Convidado.numero = Deve possuir apenas numeros de 0 a 9. Minimo:3 Max: 40.
+
+entidades.Loja.nome = Deve possuir apenas letras, no maximo 1 maiuscula. Minimo:3 Max: 40.
+
+entidades.Presente.nome = Deve possuir apenas letras, no maximo 1 maiuscula. Minimo:3 Max: 40.
+entidades.Presente.descricao = Deve possuir apenas letras, no maximo 1 maiuscula. Minimo:3 Max: 40.
+entidades.Presente.ondeEncontrar = Deve possuir apenas letras, no maximo 1 maiuscula. Minimo:3 Max: 40.
+
+entidades.ProdutorDeMidia.preco = Deve ser maior que 0.
+entidades.ProdutorDeMidia.linkParaRedeSocial = Sintax: www. + texto + .com + (.br opcional).
+
+entidades.RoupaDosNoivos.valor = Deve ser maior que 0. Pode conter ponto.
+entidades.RoupaDosNoivos.roupa = Deve possuir apenas letras, no maximo 1 maiuscula. Minimo:3 Max: 40.
+
+entidades.Convidado.quantidadeSenhas = A quantidade tem que ser maior que zero.
+entidades.Loja.cnpj = Insira um cnpj valido.
