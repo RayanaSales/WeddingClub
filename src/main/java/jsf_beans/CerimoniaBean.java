@@ -125,11 +125,6 @@ public class CerimoniaBean implements Serializable
         this.cerimonia = cerimonia;
     }
 
-    public void setTelefoneServico(CerimoniaServico cerimoniaServico)
-    {
-        this.cerimoniaServico = cerimoniaServico;
-    }
-
     public boolean validaObjeto(Cerimonia c)
     {
         boolean valido = false;

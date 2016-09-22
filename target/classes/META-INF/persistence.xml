@@ -5,7 +5,7 @@
         <jta-data-source>java:app/jdbc/Casamento</jta-data-source>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
-           <property name="javax.persistence.schema-generation.database.action" value="none"/>
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
             <property name="eclipselink.logging.level" value="FINE"/>
             <property name="eclipselink.weaving" value="static"/> 
             <!-- Usamos isso para habilitar a funcao lazy no eclipse link, usando o maven -->

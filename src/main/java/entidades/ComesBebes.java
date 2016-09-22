@@ -32,7 +32,7 @@ public class ComesBebes implements Serializable
     @Size(min = 3, max = 40)
     @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.ComesBebes.produto}")
     private String produto; //chave secundaria
-    
+
     @NotNull
     @Column(name = "numero_quantidade")
     private int quantidade;
@@ -45,28 +45,24 @@ public class ComesBebes implements Serializable
     @NotNull
     @Enumerated(EnumType.STRING)
     ComesBebesCategoria categoria;
-      
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_buffet", referencedColumnName = "id")
     private Buffet buffet;
 
-    //quero pedir o brigadeiro da minha vizinha, os doces finos de tal lugar, mas eu gosto da coxinha da padaria. Pede tudo de cada lugar
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "id_loja", referencedColumnName = "id")
-    private Loja loja;
+    //colocar metodo calcular vator total (multiplica qtd por valor e retorna)
 
     public ComesBebes()
     {
 
     }
 
-    public ComesBebes(Buffet buffet, String produto, Loja loja, ComesBebesCategoria categoria, int quantidade, double valor)
+    public ComesBebes(Buffet buffet, String produto, ComesBebesCategoria categoria, int quantidade, double valor)
     {
 
         this.quantidade = quantidade;
         this.produto = produto;
         this.valor = valor;
-        this.loja = loja;
         this.buffet = buffet;
         this.categoria = categoria;
     }
@@ -111,16 +107,6 @@ public class ComesBebes implements Serializable
         this.buffet = buffet;
     }
 
-    public Loja getLoja()
-    {
-        return loja;
-    }
-
-    public void setLoja(Loja loja)
-    {
-        this.loja = loja;
-    }
-
     public double getValor()
     {
         return valor;
@@ -140,7 +126,7 @@ public class ComesBebes implements Serializable
     {
         this.produto = produto;
     }
-    
+
     public boolean associado()
     {
         if(buffet == null)
@@ -157,7 +143,7 @@ public class ComesBebes implements Serializable
             {
                 ComesBebes outra = (ComesBebes) o;
                 if (this.id == outra.id)
-                { 
+                {
                     return true;
                 }
             }
@@ -171,5 +157,5 @@ public class ComesBebes implements Serializable
         int hash = 7;
         hash = 53 * hash + this.id;
         return hash;
-    }    
+    }
 }

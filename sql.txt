@@ -1,14 +1,3 @@
-create table localizacao
-(
-	id serial primary key,
-	txt_logradouro varchar(100),
-        txt_complemento varchar(100),
-	txt_bairro varchar(100),
-	txt_cep varchar(100),
-        txt_cidade varchar(100),
-        estado varchar(5),
-	numero_numero int
-);
 
 create table buffet
 (
@@ -21,7 +10,6 @@ create table cerimonia
 	id serial primary key,
 	dt_dataHora timestamp NOT NULL,
 
-	id_localizacao int references localizacao(id),
 	id_buffet int references buffet(id)
 );
 
@@ -46,15 +34,6 @@ create table produtorDeMidia
         id_pessoa int references pessoa(id)
 );
 
-create table presente
-(
-	id serial primary key,
-	txt_nome varchar(50) NOT NULL,
-	txt_descricao varchar(50),
-	txt_ondeEncontrar varchar(50),
-	id_cerimonia int references cerimonia(id)
-);
-
 create table noivo
 (	
         id_pessoa int references pessoa(id)
@@ -68,27 +47,6 @@ create table convidado
         id_pessoa int references pessoa(id)
 );
 
-create table telefone
-(
-	id serial primary key,
-	categoria varchar(30) NOT NULL,
-	txt_ddd varchar(5) NOT NULL,
-	txt_numero varchar(15) NOT NULL,
-
-        id_pessoa int references pessoa(id)
-);
-
-create table loja
-(
-	id serial primary key,
-	txt_nome varchar(50) NOT NULL,
-        txt_cnpj varchar(14) NOT NULL,
-
-	id_localizacao int references localizacao(id),
-	id_telefone int references telefone(id),
-        id_presente int references presente(id)
-);
-
 create table comesBebes
 (
         id serial  primary key,
@@ -97,16 +55,7 @@ create table comesBebes
         numero_valor real NOT NULL,
         categoria varchar(10) NOT NULL,
 
-        id_buffet int references buffet(id),
-        id_loja int references loja(id)
-);
-
-create table roupaDosNoivos
-(
-    id serial primary key,
-    txt_roupa varchar(50) NOT NULL,
-    numero_valor real NOT NULL,
-    id_pessoa int references pessoa(id)
+        id_buffet int references buffet(id)
 );
 
 create table grupo
@@ -132,26 +81,11 @@ CREATE SEQUENCE GRUPO_SEQUENCE INCREMENT BY 1
 CREATE SEQUENCE PESSOA_SEQUENCE INCREMENT BY 1
     MINVALUE 1 MAXVALUE 99999999 START WITH 1;
 
-CREATE SEQUENCE PRESENTE_SEQUENCE INCREMENT BY 1
-   MINVALUE 1 MAXVALUE 99999999 START WITH 1;
-
-CREATE SEQUENCE LOJA_SEQUENCE INCREMENT BY 1
-   MINVALUE 1 MAXVALUE 99999999 START WITH 1;
-
 CREATE SEQUENCE CERIMONIA_SEQUENCE INCREMENT BY 1
-   MINVALUE 1 MAXVALUE 99999999 START WITH 1;
-
-CREATE SEQUENCE TELEFONE_SEQUENCE INCREMENT BY 1
-   MINVALUE 1 MAXVALUE 99999999 START WITH 1;
-
-CREATE SEQUENCE LOCALIZACAO_SEQUENCE INCREMENT BY 1
    MINVALUE 1 MAXVALUE 99999999 START WITH 1;
 
 CREATE SEQUENCE BUFFET_SEQUENCE INCREMENT BY 1
    MINVALUE 1 MAXVALUE 99999999 START WITH 1;
 
 CREATE SEQUENCE COMESBEBES_SEQUENCE INCREMENT BY 1
-   MINVALUE 1 MAXVALUE 99999999 START WITH 1;
-
-CREATE SEQUENCE ROUPADOSNOIVOS_SEQUENCE INCREMENT BY 1
    MINVALUE 1 MAXVALUE 99999999 START WITH 1;

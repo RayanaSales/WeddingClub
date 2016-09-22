@@ -32,8 +32,7 @@ public class NoivoBean implements Serializable
     public Noivo noivo;
     public Noivo noivoLogado;
     public Grupo grupo;
-
-    public String[] roupasSelecionadas;
+    
     Encripta encripta;
 
     public NoivoBean()
@@ -42,19 +41,7 @@ public class NoivoBean implements Serializable
         noivoLogado = new Noivo();
         encripta = new Encripta();
     }
-
-    public void setRoupasSelecionadas(String[] roupasSelecionadas)
-    {
-        this.roupasSelecionadas = roupasSelecionadas;
-
-    }
-
-    public String[] getRoupasSelecionadas()
-    {
-
-        return roupasSelecionadas;
-    }
-
+ 
     public void listar()
     {
         noivos = noivoServico.listar();

@@ -29,7 +29,7 @@
 
                 <p:outputLabel for="cerimonia" value="Cerimônia :"/>
                 <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{convidadoBean.convidado.cerimonia}">
-                    <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao.rua} nº #{cerimonia.localizacao.numero} - #{cerimonia.dataHora}"  />
+                    <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia.dataHora}"  />
                 </p:selectOneMenu>
 
                 <br/>
@@ -72,12 +72,6 @@
                 </p:column> 
                 <p:column headerText="Cerimonia" >
                     <h:outputText value="#{convidado.cerimonia.dataHora}"></h:outputText>
-                </p:column>
-
-                <p:column headerText="Telefones" >
-                    <p:selectOneMenu id="telefone" value="#{convidado.telefones}">
-                        <f:selectItems value="#{convidado.telefones}" var="telefone" itemValue="#{telefone}" itemLabel="#{telefone.numero}"  />
-                    </p:selectOneMenu> 
                 </p:column>
             </p:dataTable>
         </p:fieldset>

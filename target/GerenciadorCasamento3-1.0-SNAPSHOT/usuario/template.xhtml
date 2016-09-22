@@ -19,17 +19,11 @@
 
             <p:menubar>
                 <p:menuitem value="Home" url="/faces/usuario/index.xhtml"></p:menuitem>
-                <p:menuitem value="Celular" url="/faces/usuario/celularCadastro.xhtml"></p:menuitem>
-                <p:menuitem value="Telefone" url="/faces/usuario/telefoneCadastro.xhtml"></p:menuitem>
-                <p:menuitem value="Local" url="/faces/usuario/localizacaoCadastro.xhtml"></p:menuitem>
-                <p:menuitem value="Presente" url="/faces/usuario/presenteCadastro.xhtml"></p:menuitem>
                 <p:menuitem value="Buffet" url="/faces/noivo/buffetCadastro.xhtml" rendered="#{request.isUserInRole('noivo')}"></p:menuitem>
                 <p:menuitem value="Cerimonia" url="/faces/noivo/cerimoniaCadastro.xhtml" rendered="#{request.isUserInRole('noivo')}"></p:menuitem>
                 <p:menuitem value="Noivo" url="/faces/noivo/noivo.xhtml" rendered="#{request.isUserInRole('noivo')}"></p:menuitem>
-                <p:menuitem value="Produtor" url="/faces/produtorDeMidia/produtorDeMidiaCadastro.xhtml" rendered="#{facesContext.externalContext.isUserInRole('produtorDeMidia')}"></p:menuitem>
-                <p:menuitem value="Convidado" url="/faces/convidado/convidadoCadastro.xhtml" rendered="#{facesContext.externalContext.isUserInRole('convidado')}"></p:menuitem>
-                <p:menuitem value="Roupa dos noivos" url="/faces/noivo/roupaDosNoivosCadastro.xhtml" rendered="#{facesContext.externalContext.isUserInRole('noivo')}"></p:menuitem>
-                <p:menuitem value="Loja" url="/faces/noivo/lojaCadastro.xhtml" rendered="#{facesContext.externalContext.isUserInRole('noivo')}"></p:menuitem>
+                <p:menuitem value="Produtor" url="/faces/produtorDeMidia/produtorDeMidia.xhtml" rendered="#{facesContext.externalContext.isUserInRole('produtorDeMidia')}"></p:menuitem>
+                <p:menuitem value="Convidado" url="/faces/convidado/convidado.xhtml" rendered="#{facesContext.externalContext.isUserInRole('convidado')}"></p:menuitem>
                 <p:menuitem value="Comes e bebes" url="/faces/noivo/comesBebesCadastro.xhtml" rendered="#{facesContext.externalContext.isUserInRole('noivo')}"></p:menuitem>
                 <p:menuitem value="Sair" action="#{loginBean.logout()}" 
                     immediate="true"
@@ -37,7 +31,7 @@
             </p:menubar>            
         </h:form>
         <hr/>
-        <ui:insert name="conteudo"></ui:insert>
+        <ui:insert></ui:insert>
     </h:body>
 </html>
 

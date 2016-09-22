@@ -1,101 +1,97 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core" 
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <ui:composition template="../usuario/template.xhtml" >
-        <ui:define name="conteudo">
-            <p:tabView id="abas">
-                <p:tab title="Cadastrar equipe">
-                    <h:form>
-                        <p:fieldset legend="Dados">
-                            <p:panelGrid columns="3">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="../usuario/template.xhtml"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-                                <p:outputLabel for="primeiroNome">Nome</p:outputLabel>
-                                <p:inputText id="primeiroNome" requiredMessage="Campo obrigatório" value="#{produtorDeMidiaBean.produtor.nome}" required="true"> 
-                                    <f:validateLength minimum="3" maximum="30"/>
-                                    <f:ajax execute="primeiroNome" render="messagePrimeiroNome" />
+    <p:tabView id="abas">        
+        <p:tab title="Equipe de midia" id="equipeMidia">
+            <h:form id="formularioEquipeMidias">
+                <p:messages id="messagesEdicao" severity="error" autoUpdate="true" closable="true"/>
+                <p:dataTable id="tabelaProdutor" editable="true"  var="produtor" value="#{produtorDeMidiaBean.produtorLogado}" paginator="true" rows="5" emptyMessage="Nenhum produtor cadastrado">
+                    <f:facet name="header">Produtores</f:facet>
+
+                    <p:ajax event="rowEdit" listener="#{produtorDeMidiaBean.editar}"  />
+
+                    <p:column headerText="Nome" filterMatchMode="startsWith" filterBy="#{produtor.nome}" sortBy="#{produtor.nome}">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{produtor.nome}" />
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{produtor.nome}" required="true" />
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="E-mail" filterMatchMode="startsWith" filterBy="#{produtor.email}" sortBy="#{produtor.email}">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{produtor.email}" />
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{produtor.email}" required="true" />
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Rede social" filterMatchMode="startsWith" filterBy="#{produtor.linkParaRedeSocial}" sortBy="#{produtor.linkParaRedeSocial}">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{produtor.linkParaRedeSocial}" />
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{produtor.linkParaRedeSocial}" required="true" />
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Preço" filterMatchMode="startsWith" filterBy="#{produtor.preco}" sortBy="#{produtor.preco}">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{produtor.preco}" />
+                            </f:facet>
+                            <f:facet name="input">                              
+                                <p:inputText id="valor" value="#{produtor.preco}">
+                                    <f:validateDoubleRange minimum="0.0"/>
                                 </p:inputText>
-                                <p:message for="primeiroNome" id="messagePrimeiroNome"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
 
-                                <p:outputLabel for="ultimoNome">#{mensagem.ultimoNome}</p:outputLabel>
-                                <p:inputText id="ultimoNome" requiredMessage="#{mensagem.campoObrigatorio}" value="#{alunoBean.entidade.ultimoNome}" required="true"> 
-                                    <f:validateLength minimum="3" maximum="30"/>
-                                    <f:ajax execute="ultimoNome" render="messageUltimoNome" />
-                                </p:inputText>
-                                <p:message for="ultimoNome" id="messageUltimoNome"/>
+                    <p:column headerText="Categoria" filterMatchMode="startsWith" filterBy="#{produtor.categoria}" sortBy="#{produtor.categoria}">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{produtor.categoria}" />
+                            </f:facet>
+                            <f:facet name="input">                              
+                                <p:selectOneMenu id="categoria" value="#{produtor.categoria}">
+                                    <f:selectItems value="#{produtorDeMidiaBean.categorias}"   />
+                                </p:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
 
-                                <p:outputLabel for="maskMatricula">#{mensagem.matricula}</p:outputLabel>                                                                    
-                                <p:inputMask id="maskMatricula" requiredMessage="#{mensagem.campoObrigatorio}" value="#{alunoBean.entidade.matricula}" mask="99999Y9-RC9999" required="true">
-                                    <f:ajax execute="maskMatricula" render="messageMatricula" />
-                                </p:inputMask>
-                                <p:message for="maskMatricula" id="messageMatricula"/>
 
-                            </p:panelGrid>
-                            <p:separator />
-                            <p:commandButton action="#{alunoBean.cadastrar()}" value="#{mensagem.inserir}" 
-                                             update="@form abas:formularioAlunosCadastrados:tabelaAluno" process="@form"/>
-                        </p:fieldset>
-                    </h:form>
-                </p:tab>
-                <p:tab title="#{mensagem.alunosCadastrados}" id="painelAlunosCadastrados">
-                    <h:form id="formularioAlunosCadastrados">
-                        <p:messages id="messagesEdicao" severity="error" autoUpdate="true" closable="true"/>
-                        <p:dataTable id="tabelaAluno" editable="true"  var="entidade" value="#{alunoBean.entidades}" paginator="true" rows="5" emptyMessage="#{mensagem.nenhumAlunoCadastrado}">
-                            <f:facet name="header">#{mensagem.alunos}</f:facet>
 
-                            <p:ajax event="rowEdit" listener="#{alunoBean.editar}"  />
+                    <p:column>
+                        <p:rowEditor />
+                    </p:column>
+                    <p:column>
+                        <p:commandLink styleClass="ui-icon ui-icon-trash"  action="#{produtorDeMidiaBean.remover(produtor)}" process="@this" update="tabelaProdutor">
+                            <p:confirm header="Confirmação" message="Tem certeza ?" icon="ui-icon-alert" />
+                        </p:commandLink>
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:tab>
+    </p:tabView>
 
-                            <p:column headerText="#{mensagem.primeiroNome}" filterMatchMode="startsWith" filterBy="#{entidade.primeiroNome}" sortBy="#{entidade.primeiroNome}">
-                                <p:cellEditor>
-                                    <f:facet name="output">
-                                        <h:outputText value="#{entidade.primeiroNome}" />
-                                    </f:facet>
-                                    <f:facet name="input">
-                                        <p:inputText value="#{entidade.primeiroNome}" required="true" />
-                                    </f:facet>
-                                </p:cellEditor>
-                            </p:column>
-
-                            <p:column headerText="#{mensagem.ultimoNome}" filterMatchMode="startsWith" filterBy="#{entidade.ultimoNome}" sortBy="#{entidade.ultimoNome}">
-                                <p:cellEditor>
-                                    <f:facet name="output">
-                                        <h:outputText value="#{entidade.ultimoNome}" />
-                                    </f:facet>
-                                    <f:facet name="input">
-                                        <p:inputText value="#{entidade.ultimoNome}" required="true" />
-                                    </f:facet>
-                                </p:cellEditor>
-                            </p:column>
-
-                            <p:column headerText="#{mensagem.matricula}" filterMatchMode="startsWith" filterBy="#{entidade.matricula}" sortBy="#{entidade.matricula}">
-                                <p:cellEditor>
-                                    <f:facet name="output">
-                                        <h:outputText value="#{entidade.matricula}" />
-                                    </f:facet>
-                                    <f:facet name="input">
-                                        <p:inputMask  value="#{entidade.matricula}" mask="99999Y9-RC9999"/>
-                                    </f:facet>
-                                </p:cellEditor>
-                            </p:column>
-
-                            <p:column>
-                                <p:rowEditor />
-                            </p:column>
-                            <p:column>
-                                <p:commandLink styleClass="ui-icon ui-icon-trash"  action="#{alunoBean.remover(entidade)}" process="@this" update="tabelaAluno">
-                                    <p:confirm header="Confirmação" message="Tem certeza ?" icon="ui-icon-alert" />
-                                </p:commandLink>
-                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                                </p:confirmDialog>
-                            </p:column> 
-                        </p:dataTable>
-                    </h:form>
-                </p:tab>
-            </p:tabView>
-        </ui:define>
-    </ui:composition>
-</html>
+</ui:decorate>

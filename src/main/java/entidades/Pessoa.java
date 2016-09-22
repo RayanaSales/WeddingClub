@@ -53,10 +53,6 @@ public class Pessoa implements Serializable
     @Column(name = "numero_numeroAleatorio")
     private int numeroAleatorio;
 
-    @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL, orphanRemoval = true)
-    protected List<Telefone> telefones;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cerimonia", referencedColumnName = "id")
     protected Cerimonia cerimonia;
@@ -67,8 +63,7 @@ public class Pessoa implements Serializable
     public List<Grupo> grupos;
 
     public Pessoa()
-    {
-        telefones = new ArrayList<>();
+    {        
         grupos = new ArrayList<>();
     }
 
@@ -76,8 +71,7 @@ public class Pessoa implements Serializable
     {
         this.nome = nome;
         this.email = email;
-        this.cerimonia = cerimonia;
-        telefones = new ArrayList<>();
+        this.cerimonia = cerimonia;        
     }
 
     public Integer getId()
@@ -98,49 +92,6 @@ public class Pessoa implements Serializable
     public void setSenha(String senha)
     {
         this.senha = senha;
-    }
-
-    public List<Telefone> getTelefones()
-    {
-        return telefones;
-    }
-
-    //PADRAO EXPERT
-    public void setTelefones(List<Telefone> telefonesNovos)
-    {
-        if (telefones == null)
-        {
-            telefones = new ArrayList<>();
-        }
-        
-        if (telefonesNovos == null)
-        {
-            telefonesNovos = new ArrayList<>();
-        }
-
-        for (Telefone telefone : telefonesNovos)
-        {
-            if (!existente(telefone))
-            {
-                telefones.add(telefone);
-            }
-        }
-    }
-
-    public boolean existente(Object c)
-    {
-        Telefone t = (Telefone) c;
-        boolean contem = false;
-
-        for (int i = 0; i < telefones.size(); i++)
-        {
-            if (telefones.get(i).getId().equals(t.getId()))
-            {
-                contem = true;
-                break;
-            }
-        }
-        return contem;
     }
 
     public String getNome()
@@ -201,17 +152,6 @@ public class Pessoa implements Serializable
             }
         }
     }
-    
-    
-    
-    
-//    public boolean associado()
-//    {
-//        if(telefones.isEmpty() && cerimonia == null)
-//            return false;
-//                    
-//        return true;
-//    }
 
     @Override
     public boolean equals(Object o)

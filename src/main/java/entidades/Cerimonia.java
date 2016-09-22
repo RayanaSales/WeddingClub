@@ -35,35 +35,26 @@ public class Cerimonia implements Serializable
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataHora; //chave secundaria
 
-    //Relacionamentos:    
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, optional = false)
-    @JoinColumn(name = "id_localizacao", referencedColumnName = "id")
-    private Localizacao localizacao;
-
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, optional = false)
     @JoinColumn(name = "id_buffet", referencedColumnName = "id")
     private Buffet buffet;
-
-    //lista de presentes que o casal cria
-    @OneToMany(mappedBy = "cerimonia", fetch = FetchType.EAGER,
-            cascade = CascadeType.MERGE, orphanRemoval = true)
-    private List<Presente> presentes;
 
     //uma cerimonia to many pessoas (noivos, convidados, produtorDeMidia)
     @OneToMany(mappedBy = "cerimonia", fetch = FetchType.EAGER,
             cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Pessoa> pessoas;
 
+    //colocar campo string local
+
     public Cerimonia()
     {
-        presentes = new ArrayList<>();
         pessoas = new ArrayList<>();
     }
 
     public Cerimonia(Date dataHora)
     {
         this.dataHora = dataHora;
-        //  this.localizacao = localizacao;        
+        //  this.localizacao = localizacao;
     }
 
     public Date getDataHora()
@@ -86,16 +77,6 @@ public class Cerimonia implements Serializable
         this.id = id;
     }
 
-    public Localizacao getLocalizacao()
-    {
-        return localizacao;
-    }
-
-    public void setLocalizacao(Localizacao localizacao)
-    {
-        this.localizacao = localizacao;
-    }
-
     public Buffet getBuffet()
     {
         return buffet;
@@ -104,31 +85,6 @@ public class Cerimonia implements Serializable
     public void setBuffet(Buffet buffet)
     {
         this.buffet = buffet;
-    }
-
-    public List<Presente> getPresentes()
-    {
-        return presentes;
-    }
-
-    public void setPresentes(List<Presente> presentesNovos)
-    {
-        if (presentes == null)
-        {
-            presentes = new ArrayList<>();
-        }
-        if (presentesNovos == null)
-        {
-            presentesNovos = new ArrayList<>();
-        }
-
-        for (Presente presente : presentesNovos)
-        {
-            if (!presentes.contains(presente))
-            {
-                presentes.add(presente);
-            }
-        }
     }
 
     public List<Pessoa> getPessoas()
@@ -142,7 +98,7 @@ public class Cerimonia implements Serializable
         {
             pessoas = new ArrayList<>();
         }
-        
+
         if (pessoasNovas == null)
         {
             pessoasNovas = new ArrayList<>();

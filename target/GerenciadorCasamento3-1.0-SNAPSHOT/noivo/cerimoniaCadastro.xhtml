@@ -16,11 +16,6 @@
                 <p:calendar id="datetime" value="#{cerimoniaBean.cerimonia.dataHora}" pattern="yyyy/MM/dd HH:mm:ss" />
                 <p:message for="datetime" id="messageDatetime" severity="error"/>
 
-                <p:outputLabel for="local" value="Localização :"/>
-                <p:selectOneMenu id="local" converter="localConverter" value="#{cerimoniaBean.cerimonia.localizacao}">
-                    <f:selectItems value="#{localizacaoBean.locais}" var="local" itemValue="#{local}" itemLabel="#{local.logradouro}"  />
-                </p:selectOneMenu>
-
                 <br/>
                 <p:outputLabel for="buffet" value="Buffet :"/>
                 <p:selectOneMenu id="buffet" converter="buffetConverter" value="#{cerimoniaBean.cerimonia.buffet}">
@@ -46,9 +41,7 @@
                 <p:column headerText="Data" sortBy="#{cerimonia.dataHora}">
                     <h:outputText value="#{cerimonia.dataHora}"></h:outputText>
                 </p:column> 
-                <p:column headerText="Localização" >
-                    <h:outputText value="#{cerimonia.localizacao.bairro}"></h:outputText>
-                </p:column>
+               
                 <p:column headerText="Buffet" >
                     <h:outputText value="#{cerimonia.buffet.valorTotalGasto}"></h:outputText>
                 </p:column>
@@ -59,14 +52,6 @@
                           <f:selectItems value="#{cerimonia.pessoas}" var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.nome}"  />
                       </p:selectOneMenu> 
                   </p:column> 
-
-
-                <p:column headerText="Presentes" >
-                    <p:selectOneMenu id="presentes" value="#{cerimonia.presentes}">
-                        <f:selectItems value="#{cerimonia.presentes}" var="presente" itemValue="#{presente}" itemLabel="#{presente.nome}"  />
-                    </p:selectOneMenu> 
-                </p:column>
-
             </p:dataTable>
         </p:fieldset>
     </h:form>
