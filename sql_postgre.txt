@@ -1,0 +1,91 @@
+
+create table buffet
+(
+	id serial primary key,
+	numero_valorTotal real NOT NULL
+);
+
+create table cerimonia
+(
+	id serial primary key,
+	dt_dataHora timestamp NOT NULL,
+
+	id_buffet int references buffet(id)
+);
+
+create table pessoa
+(
+        id serial primary key,
+        disc_pessoa varchar(1),
+        txt_nome varchar(100),
+	txt_email varchar(100),
+	txt_senha varchar(500),
+	numero_numeroAleatorio int,
+
+        id_cerimonia int references cerimonia(id)
+);
+
+create table produtorDeMidia
+(
+	numero_preco real,
+        categoria varchar(30),
+	txt_linkParaRedeSocial varchar(100),
+
+        id_pessoa int references pessoa(id)
+);
+
+create table noivo
+(	
+        id_pessoa int references pessoa(id)
+);
+
+create table convidado
+(
+        categoria varchar(30) NOT NULL,
+        numero_quantidadeSenhas int NOT NULL ,
+
+        id_pessoa int references pessoa(id)
+);
+
+create table comesBebes
+(
+        id serial  primary key,
+        txt_produto varchar(100) NOT NULL,
+        numero_quantidade int NOT NULL,
+        numero_valor real NOT NULL,
+        categoria varchar(10) NOT NULL,
+
+        id_buffet int references buffet(id)
+);
+
+create table grupo
+(
+	id serial primary key,
+	txt_nome varchar(20) NOT NULL
+);
+
+create table pessoa_grupo
+(
+	id_pessoa int references pessoa(id),
+	id_grupo int references grupo(id)
+);
+
+INSERT INTO grupo (txt_nome) VALUES ('noivo');  
+INSERT INTO grupo (txt_nome) VALUES ('produtorDeMidia');
+INSERT INTO grupo (txt_nome) VALUES ('convidado');
+INSERT INTO grupo (txt_nome) VALUES ('usuario');
+
+CREATE SEQUENCE GRUPO_SEQUENCE INCREMENT BY 1
+    MINVALUE 1 MAXVALUE 99999999 START WITH 1;
+
+CREATE SEQUENCE PESSOA_SEQUENCE INCREMENT BY 1
+    MINVALUE 1 MAXVALUE 99999999 START WITH 1;
+
+CREATE SEQUENCE CERIMONIA_SEQUENCE INCREMENT BY 1
+   MINVALUE 1 MAXVALUE 99999999 START WITH 1;
+
+CREATE SEQUENCE BUFFET_SEQUENCE INCREMENT BY 1
+   MINVALUE 1 MAXVALUE 99999999 START WITH 1;
+
+CREATE SEQUENCE COMESBEBES_SEQUENCE INCREMENT BY 1
+   MINVALUE 1 MAXVALUE 99999999 START WITH 1;
