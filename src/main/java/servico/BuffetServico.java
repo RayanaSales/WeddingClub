@@ -59,10 +59,10 @@ public class BuffetServico extends Servico
     {
         em.flush();
 
-        if (existente(buffet.getValorTotalGasto()) == false)
+        if (existente(buffet.getValorTotalGasto()) == true)
         {
             em.merge(buffet);
-        } else
+        } else if (existente(buffet.getValorTotalGasto()) == false)
         {
             throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
         }

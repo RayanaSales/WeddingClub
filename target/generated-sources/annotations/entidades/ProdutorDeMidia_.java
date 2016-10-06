@@ -5,7 +5,7 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2016-10-05T09:53:04")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2016-10-06T20:42:22")
 @StaticMetamodel(ProdutorDeMidia.class)
 public class ProdutorDeMidia_ extends Pessoa_ {
 

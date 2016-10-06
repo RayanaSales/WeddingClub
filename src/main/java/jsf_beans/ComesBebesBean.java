@@ -15,6 +15,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.ConstraintViolationException;
+import org.primefaces.event.RowEditEvent;
 import servico.ComesBebesServico;
 
 @ManagedBean
@@ -63,6 +64,11 @@ public class ComesBebesBean implements Serializable
         cb = new ComesBebes(); //renove a instancia, para o proximo elemento
     }
 
+    public void editar(RowEditEvent editEvent) {
+        cb = (ComesBebes) editEvent.getObject();
+        editar(cb.getId());
+    }
+    
     public void editar(int id)
     {
         listar(); //atualize a minha lista   

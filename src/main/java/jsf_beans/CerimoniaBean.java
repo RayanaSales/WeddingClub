@@ -1,6 +1,7 @@
 package jsf_beans;
 
 import entidades.Cerimonia;
+import entidades.Noivo;
 import excecao.ExcecaoNegocio;
 import excecao.MensagemExcecao;
 import java.io.Serializable;
@@ -18,6 +19,7 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import org.primefaces.event.RowEditEvent;
 import servico.CerimoniaServico;
 
 @ManagedBean
@@ -69,6 +71,10 @@ public class CerimoniaBean implements Serializable
         }
     }
 
+    public void editar(RowEditEvent editEvent) {
+        cerimonia = (Cerimonia) editEvent.getObject();
+        editar(cerimonia.getId());
+    }
     public void editar(int id)
     {
         listar(); //atualize a minha lista

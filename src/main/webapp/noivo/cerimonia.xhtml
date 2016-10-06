@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             template="../usuario/template.xhtml">     
+    <p:tabView id="abas">  
+        <p:tab title="Cadastrar" id="painelCerimonia">
+            <h:form id="Cerimonia">                
+                <h:panelGrid columns="3" cellpadding="5">
+
+                    <p:outputLabel for="datetime" value="Datetime:" />
+                    <p:calendar id="datetime" value="#{cerimoniaBean.cerimonia.dataHora}" pattern="yyyy/MM/dd HH:mm:ss" />
+                    <p:message for="datetime" id="messageDatetime" severity="error"/>
+
+                    <p:outputLabel for="buffet" value="Buffet :"/>
+                    <p:selectOneMenu id="buffet" converter="buffetConverter" value="#{cerimoniaBean.cerimonia.buffet}">
+                        <f:selectItems value="#{buffetBean.buffets}" var="buffet" itemValue="#{buffet}" itemLabel="#{buffet.valorTotalGasto}"  />
+                    </p:selectOneMenu>
+                </h:panelGrid>   
+
+                <p:toolbarGroup>
+                    <p:commandButton action="#{cerimoniaBean.salvar()}" value="Salvar" ajax="false" update="@form" 
+                                     title="Salvar" icon="ui-icon-check" validateClient="false"/>
+                </p:toolbarGroup>               
+            </h:form>   
+        </p:tab>
+        <p:tab title="Editar" id="painelEditarCerimonia">
+            <h:form id="formularioCerimoniaCadastradas">
+                <p:messages id="messagesEdicao" severity="error" autoUpdate="true" closable="true"/>
+                <p:dataTable id="tabelaCerimonia" editable="true" var="cerimonia" value="#{cerimoniaBean.cerimonias}" paginator="true" rows="5" emptyMessage="Nenhuma cerimônia cadastrada">
+                    <f:facet name="header">Editar Cerimônia</f:facet>
+
+                    <p:ajax event="rowEdit" listener="#{cerimoniaBean.editar}"  />
+
+                    <p:column headerText="Data" filterMatchMode="startsWith" filterBy="#{cerimonia.dataHora}" sortBy="#{cerimonia.dataHora}">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{cerimonia.dataHora}"></h:outputText>
+                            </f:facet>
+                            <f:facet name="input">                              
+                                <p:calendar id="datetime" value="#{cerimoniaBean.cerimonia.dataHora}" pattern="yyyy/MM/dd HH:mm:ss" />
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Buffet" >
+                        <h:outputText value="#{cerimonia.buffet.valorTotalGasto}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Pessoas" >
+                        <p:selectOneMenu id="pessoas" value="#{cerimonia.pessoas}">
+                            <f:selectItems value="#{cerimonia.pessoas}" var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.nome}"  />
+                        </p:selectOneMenu> 
+                    </p:column> 
+                    <p:column>
+                        <p:rowEditor />
+                    </p:column>
+                    <p:column>
+                        <p:commandLink styleClass="ui-icon ui-icon-trash"  action="#{cerimoniaBean.remover(cerimonia)}" process="@this" update="tabelaCerimonia">
+                            <p:confirm header="Confirmação" message="Tem certeza ?" icon="ui-icon-alert" />
+                        </p:commandLink>
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
+                    </p:column> 
+                </p:dataTable>
+            </h:form>
+        </p:tab>
+    </p:tabView>
+</ui:decorate>

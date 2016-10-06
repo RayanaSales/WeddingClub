@@ -2,6 +2,7 @@ package jsf_beans;
 
 import entidades.Buffet;
 import entidades.Cerimonia;
+import entidades.Convidado;
 import excecao.ExcecaoNegocio;
 import excecao.MensagemExcecao;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.ConstraintViolationException;
+import org.primefaces.event.RowEditEvent;
 import servico.BuffetServico;
 import servico.CerimoniaServico;
 
@@ -61,14 +63,17 @@ public class BuffetBean implements Serializable
         buffet = new Buffet(); //renove a instancia, para o proximo elemento        
     }
 
+    public void editar(RowEditEvent editEvent) {
+        buffet = (Buffet) editEvent.getObject();
+        editar(buffet.getId());
+    }
+    
     public void editar(int id)
     {
-
         listar(); //atualize a minha lista   
         buffet.setId(id);
         try
         {
-
             buffetServico.atualizar(buffet);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
         } catch (ExcecaoNegocio ex)
