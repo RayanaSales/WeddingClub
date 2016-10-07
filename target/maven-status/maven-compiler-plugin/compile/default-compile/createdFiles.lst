@@ -46,6 +46,7 @@ excecao/ExcecaoSistema.class
 converter/BuffetConverter.class
 entidades/Convidado_.class
 servico/ComesBebesServico.class
+jsf_beans/UserSettings.class
 validadores/ValidaURL.class
 enumeracoes/ComesBebesCategoria.class
 util/LeitorPropriedades.class

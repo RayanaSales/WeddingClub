@@ -6,26 +6,9 @@
     <h:head>
         <title>Wedding club</title>
     </h:head>
-    <h:body>
-
-        <!--        <h:panelGrid columns="2">
-                    <h:graphicImage library="imagens" name="ring1.jpg" width="100px"/>
-                    <h1>Wedding club - cadastro inicial</h1>
-                </h:panelGrid>
-
-                <h:form>
-                    <p:growl id="growl" autoUpdate="true" globalOnly="true" showDetail="true" life="4000" severity="info, warn"/>
-                    <p:menubar>
-                        <p:menuitem value="Noivo" url="/faces/publico/cadastroInicialNoivo.xhtml"></p:menuitem>
-                        <p:menuitem value="Produtor" url="/faces/publico/cadastroInicialProdutor.xhtml"></p:menuitem>
-                        <p:menuitem value="Convidado" url="/faces/publico/cadastroInicialConvidado.xhtml"></p:menuitem>
-                    </p:menubar>
-                </h:form>
-                <hr/>
-                <ui:insert></ui:insert>-->
-
-        <p:growl showDetail="false" globalOnly="true"  autoUpdate="true" />
-        <p:tabView id="abas">
+    <h:body >
+     <p:growl  showDetail="false" globalOnly="true"  autoUpdate="true" />
+        <p:tabView id="abas" >
             <p:tab title="Cadastrar noivo">
                 <h:form>
                     <p:fieldset legend="Dados noivo">

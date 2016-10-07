@@ -7,11 +7,55 @@
              template="../usuario/template.xhtml"
              xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <p:tabView id="abas">        
+    <p:tabView id="abas">       
+        <p:tab title="Cadastrar" id="painelCadastroProdutorDeMidia">
+            <h:form id="cadastroProdutorDeMidia">                
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputLabel for="nome" value="Nome:" />
+                    <p:inputText id="nome" value="#{produtorDeMidiaBean.produtor.nome}"/>
+                    <p:message for="nome" id="messageNome" severity="error"/>
+
+                    <p:outputLabel for="email" value="Email:" />
+                    <p:inputText id="email" value="#{produtorDeMidiaBean.produtor.email}"/>
+                    <p:message for="email" id="messageEmail" severity="error"/>
+
+                    <p:outputLabel for="senha" value="Senha:" />
+                    <p:password id="senha" value="#{produtorDeMidiaBean.produtor.senha}" feedback="true"/>
+                    <p:message for="senha" id="messageSenha" severity="error"/>
+
+                    <p:outputLabel for="valor" value="Valor:" />
+                    <p:inputText id="valor" value="#{produtorDeMidiaBean.produtor.preco}">
+                        <f:validateDoubleRange minimum="0.0"/>
+                    </p:inputText>
+                    <p:message for="valor" id="messageValorGasto" severity="error"/>
+
+                    <p:outputLabel for="url" value="Link para rede social:" />
+                    <p:inputText id="url" value="#{produtorDeMidiaBean.produtor.linkParaRedeSocial}"/>
+                    <p:message for="url" id="messageURL" severity="error"/>
+
+                    <p:outputLabel for="categoria" value="Categoria:" />
+
+                    <p:selectOneMenu id="categoria" value="#{produtorDeMidiaBean.produtor.categoria}">
+                        <f:selectItems value="#{produtorDeMidiaBean.categorias}"   />
+                    </p:selectOneMenu>
+
+                    <br/>
+                    <p:outputLabel for="cerimonia" value="Cerimônia :"/>
+                    <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{produtorDeMidiaBean.produtor.cerimonia}">
+                        <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao.rua} nº #{cerimonia.localizacao.numero} - #{cerimonia.dataHora}"  />
+                    </p:selectOneMenu>
+                </h:panelGrid>   
+
+                <p:toolbarGroup>
+                    <p:commandButton action="#{produtorDeMidiaBean.salvar()}" value="Salvar" ajax="false" update="@form" 
+                                     title="Salvar" icon="ui-icon-check" validateClient="false"/>
+                </p:toolbarGroup>
+            </h:form>   
+        </p:tab>
         <p:tab title="Equipe de midia" id="equipeMidia">
             <h:form id="formularioEquipeMidias">
                 <p:messages id="messagesEdicao" severity="error" autoUpdate="true" closable="true"/>
-                <p:dataTable id="tabelaProdutor" editable="true"  var="produtor" value="#{produtorDeMidiaBean.produtorLogado}" paginator="true" rows="5" emptyMessage="Nenhum produtor cadastrado">
+                <p:dataTable id="tabelaProdutor" editable="true"  var="produtor" value="#{produtorDeMidiaBean.produtores}" paginator="true" rows="5" emptyMessage="Nenhum produtor cadastrado">
                     <f:facet name="header">Produtores</f:facet>
 
                     <p:ajax event="rowEdit" listener="#{produtorDeMidiaBean.editar}"  />
@@ -74,9 +118,6 @@
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
-
-
-
                     <p:column>
                         <p:rowEditor />
                     </p:column>

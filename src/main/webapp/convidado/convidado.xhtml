@@ -8,12 +8,51 @@
              xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <p:tabView id="abas">        
+         <p:tab title="Cadastrar" id="painelCadastrarConvidado">
+            <h:form id="Convidado">                
+                <h:panelGrid columns="3" cellpadding="5">
+
+                    <p:outputLabel for="nome" value="Nome:" />
+                    <p:inputText id="nome" value="#{convidadoBean.convidado.nome}"/>
+                    <p:message for="nome" id="messageDatetime" severity="error"/>
+
+                    <p:outputLabel for="email" value="Email:" />
+                    <p:inputText id="email" value="#{convidadoBean.convidado.email}"/>
+                    <p:message for="email" id="messageEmail" severity="error"/>
+
+                    <p:outputLabel for="senha" value="Senha:" />
+                    <p:password id="senha" value="#{convidadoBean.convidado.senha}" feedback="true"/>
+                    <p:message for="senha" id="messageSenha" severity="error"/>
+
+                    <p:outputLabel for="quantidadeSenhas" value="Quantidade de senhas: " />
+                    <p:inputMask id="quantidadeSenhas" value="#{convidadoBean.convidado.quantidadeSenhas}" mask="9?9"/>
+                    <p:message for="quantidadeSenhas" id="messageSenhas" severity="error"/>
+
+                    <p:outputLabel for="cerimonia" value="Cerimônia :"/>
+                    <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{convidadoBean.convidado.cerimonia}">
+                        <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia.dataHora}"  />
+                    </p:selectOneMenu>
+
+                    <br/>
+                    <p:outputLabel for="categoria" value="Categoria: " />
+                    <p:selectOneMenu id="categoria" value="#{convidadoBean.convidado.categoria}">
+                        <f:selectItems value="#{convidadoBean.categorias}"   />
+                    </p:selectOneMenu>
+
+            </h:panelGrid>   
+
+            <p:toolbarGroup>
+                    <p:commandButton action="#{convidadoBean.salvar()}" value="Salvar" ajax="false" update="@form" 
+                                 title="Salvar" icon="ui-icon-check" validateClient="false"/>                
+            </p:toolbarGroup>
+        
+            </h:form>   
+        </p:tab>       
         <p:tab title="Gerenciar cadastro" id="painelConvidado">
             <h:form id="formularioConvidado">
                 <p:messages id="messagesEdicao" severity="error" autoUpdate="true" closable="true"/>
-                <p:dataTable id="tabelaConvidado" editable="true"  var="convidado" value="#{convidadoBean.convidadoLogado}" paginator="true" rows="5" emptyMessage="Nenhum convidado cadastrado">
+                <p:dataTable id="tabelaConvidado" editable="true"  var="convidado" value="#{convidadoBean.convidados}" paginator="true" rows="5" emptyMessage="Nenhum convidado cadastrado">
                     <f:facet name="header">Convidados</f:facet>
-
                     <p:ajax event="rowEdit" listener="#{convidadoBean.editar}"  />
 
                     <p:column headerText="Nome" filterMatchMode="startsWith" filterBy="#{convidado.nome}" sortBy="#{convidado.nome}">
@@ -61,9 +100,6 @@
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
-
-
-
                     <p:column>
                         <p:rowEditor />
                     </p:column>

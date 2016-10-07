@@ -4,6 +4,7 @@
 /home/rayana/Documentos/REP_GITHUB/WeddingClub/src/main/java/jsf_beans/CerimoniaBean.java
 /home/rayana/Documentos/REP_GITHUB/WeddingClub/src/main/java/enumeracoes/ComesBebesCategoria.java
 /home/rayana/Documentos/REP_GITHUB/WeddingClub/src/main/java/entidades/Noivo.java
+/home/rayana/Documentos/REP_GITHUB/WeddingClub/src/main/java/jsf_beans/UserSettings.java
 /home/rayana/Documentos/REP_GITHUB/WeddingClub/src/main/java/converter/GrupoConverter.java
 /home/rayana/Documentos/REP_GITHUB/WeddingClub/src/main/java/servico/PessoaServico.java
 /home/rayana/Documentos/REP_GITHUB/WeddingClub/src/main/java/jsf_beans/ProdutorDeMidiaBean.java
@@ -20,9 +21,9 @@
 /home/rayana/Documentos/REP_GITHUB/WeddingClub/src/main/java/servico/GrupoServico.java
 /home/rayana/Documentos/REP_GITHUB/WeddingClub/src/main/java/jsf_beans/ConvidadoBean.java
 /home/rayana/Documentos/REP_GITHUB/WeddingClub/src/main/java/enumeracoes/ProdutorDeMidiaCategoria.java
+/home/rayana/Documentos/REP_GITHUB/WeddingClub/src/main/java/entidades/Convidado.java
 /home/rayana/Documentos/REP_GITHUB/WeddingClub/src/main/java/entidades/Pessoa.java
 /home/rayana/Documentos/REP_GITHUB/WeddingClub/src/main/java/entidades/Buffet.java
-/home/rayana/Documentos/REP_GITHUB/WeddingClub/src/main/java/entidades/Convidado.java
 /home/rayana/Documentos/REP_GITHUB/WeddingClub/src/main/java/entidades/ProdutorDeMidia.java
 /home/rayana/Documentos/REP_GITHUB/WeddingClub/src/main/java/servico/BuffetServico.java
 /home/rayana/Documentos/REP_GITHUB/WeddingClub/src/main/java/servico/CerimoniaServico.java
