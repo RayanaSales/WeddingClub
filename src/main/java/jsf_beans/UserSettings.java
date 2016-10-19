@@ -11,7 +11,7 @@ public class UserSettings implements Serializable {
 
     private static final long serialVersionUID = 677831240483987806L;
 
-    private String tema = "ui-lightness";
+    private String tema = "";
 
     @PostConstruct
     public void inicializar() {

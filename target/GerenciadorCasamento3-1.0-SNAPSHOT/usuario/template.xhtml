@@ -5,33 +5,32 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Wedding club</title>       
+        <title>Wedding club</title>     
+        <h:outputStylesheet library="css" name="newcss1.css" />
     </h:head>
-    <h:body style="background-color: #FCF0C8;">
+    <h:body style="background-color: #E5E5E4;">
 
-        <h:panelGrid columns="2">
-            <h:graphicImage library="imagens" name="ring1.jpg" width="100px"/>
-            <h1>Wedding Club</h1>   
-        </h:panelGrid>
 
-        <h:form>
+        <h:form style="border: none">
             <p:growl id="growl" autoUpdate="true" globalOnly="true" showDetail="true" life="4000" severity="info, warn"/>
-
-            <p:menubar>
-                <p:menuitem value="Home" url="/faces/usuario/index.xhtml"></p:menuitem>
-                <p:menuitem value="Configuração" url="/faces/usuario/configuracoes.xhtml"></p:menuitem>
-                <p:menuitem value="Buffet" url="/faces/noivo/buffet.xhtml" rendered="#{request.isUserInRole('noivo')}"></p:menuitem>
-                <p:menuitem value="Cerimonia" url="/faces/noivo/cerimonia.xhtml" rendered="#{request.isUserInRole('noivo')}"></p:menuitem>
-                <p:menuitem value="Noivo" url="/faces/noivo/noivo.xhtml" rendered="#{request.isUserInRole('noivo')}"></p:menuitem>
-                <p:menuitem value="Produtor" url="/faces/produtorDeMidia/produtorDeMidia.xhtml" rendered="#{facesContext.externalContext.isUserInRole('produtorDeMidia')}"></p:menuitem>
-                <p:menuitem value="Convidado" url="/faces/convidado/convidado.xhtml" rendered="#{facesContext.externalContext.isUserInRole('convidado')}"></p:menuitem>
-                <p:menuitem value="Comes e bebes" url="/faces/noivo/comesBebes.xhtml" rendered="#{facesContext.externalContext.isUserInRole('noivo')}"></p:menuitem>
-                <p:menuitem value="Sair" action="#{loginBean.logout()}" 
-                            immediate="true"
-                            icon="ui-icon-home"/>
-            </p:menubar>            
+            <h:graphicImage library="imagens" name="barratopo.png" height='100%' width="100%"/>
+            <div >
+                <p:menubar styleClass="menubar"  >
+                    <p:menuitem styleClass="menuitem"  value="Home" url="/faces/usuario/index.xhtml"></p:menuitem>
+                    <p:menuitem value="Configuração" url="/faces/usuario/configuracoes.xhtml"></p:menuitem>
+                    <p:menuitem value="Buffet" url="/faces/noivo/buffet.xhtml" rendered="#{request.isUserInRole('noivo')}"></p:menuitem>
+                    <p:menuitem value="Cerimonia" url="/faces/noivo/cerimonia.xhtml" rendered="#{request.isUserInRole('noivo')}"></p:menuitem>
+                    <p:menuitem value="Noivo" url="/faces/noivo/noivo.xhtml" rendered="#{request.isUserInRole('noivo')}"></p:menuitem>
+                    <p:menuitem value="Produtor" url="/faces/produtorDeMidia/produtorDeMidia.xhtml" rendered="#{facesContext.externalContext.isUserInRole('produtorDeMidia')}"></p:menuitem>
+                    <p:menuitem value="Convidado" url="/faces/convidado/convidado.xhtml" rendered="#{facesContext.externalContext.isUserInRole('convidado')}"></p:menuitem>
+                    <p:menuitem value="Comes e bebes" url="/faces/noivo/comesBebes.xhtml" rendered="#{facesContext.externalContext.isUserInRole('noivo')}"></p:menuitem>
+                    <p:menuitem value="Sair" action="#{loginBean.logout()}" 
+                                immediate="true"
+                                icon="ui-icon-home"/>
+                </p:menubar>          
+            </div>
         </h:form>
-        <hr/>
+      
         <ui:insert></ui:insert>
     </h:body>
 </html>
