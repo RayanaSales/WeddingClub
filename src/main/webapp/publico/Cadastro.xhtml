@@ -4,48 +4,41 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Wedding club</title>
+        <title>Wedding club</title>     
+        <h:outputStylesheet library="css" name="newcss1.css" />
     </h:head>
-    <h:body >
-     <p:growl  showDetail="false" globalOnly="true"  autoUpdate="true" />
+    <h:body style="background-color: #E5E5E4;">
+
+        <p:growl id="growl" autoUpdate="true" globalOnly="true" showDetail="true" life="4000" severity="info, warn"/>
+        <h:graphicImage library="imagens" name="barratopo.png" height='100%' width="100%"/>
+
         <p:tabView id="abas" >
-            <p:tab title="Cadastrar noivo">
+            <p:tab title="Noivo">
                 <h:form>
-                    <p:fieldset legend="Dados noivo">
-                        <p:panelGrid columns="3">
+                    <h:panelGrid columns="3" >
 
-                            <p:outputLabel for="primeiroNome">Nome</p:outputLabel>
-                            <p:inputText id="primeiroNome" requiredMessage="Campo obrigatório" value="#{noivoBean.noivo.nome}" required="true">
-                                <f:validateLength minimum="3" maximum="30"/>
-                                <f:ajax execute="primeiroNome" render="messagePrimeiroNome" />
-                            </p:inputText>
-                            <p:message for="primeiroNome" id="messagePrimeiroNome"/>
+                        <p:outputLabel for="nome" value="Nome:" />
+                        <p:inputText id="nome" value="#{noivoBean.noivo.nome}"/>
+                        <p:message for="nome" id="messageDatetime" severity="error"/>
 
-                            <p:outputLabel for="email">E-mail</p:outputLabel>
-                            <p:inputText id="email" requiredMessage="Campo obrigatório" value="#{noivoBean.noivo.email}" required="true">
-                                <f:validateLength minimum="5" maximum="30"/>
-                                <f:ajax execute="email" render="messageEmail" />
-                            </p:inputText>
-                            <p:message for="email" id="messageEmail"/>
+                        <p:outputLabel for="email" value="Email:" />
+                        <p:inputText id="email" value="#{noivoBean.noivo.email}"/>
+                        <p:message for="email" id="messageEmail" severity="error"/>
 
-                            <p:outputLabel value="Senha" />
-                            <p:password feedback="true" value="#{noivoBean.noivo.senha}" requiredMessage="Campo obrigatório" id="senha" weakLabel="#{mensagem.senhaFraca}"
-                                        goodLabel="#{mensagem.senhaBoa}" strongLabel="#{mensagem.senhaForte}" promptLabel="Informe a senha" required="true"/>
-                            <p:message for="senha" id="messageSenha" />
+                        <p:outputLabel for="senha" value="Senha:" />
+                        <p:password id="senha" value="#{noivoBean.noivo.senha}" feedback="true"/>
+                        <p:message for="senha" id="messageSenha" severity="error"/>
 
-                        </p:panelGrid>
-                        <p:separator />
-                        <p:commandButton action="#{noivoBean.salvar()}" value="Cadastrar"
-                                         process="@form"/>
-                    </p:fieldset>
+                    </h:panelGrid>
+                   <br/>
+                    <p:commandButton action="#{noivoBean.salvar()}" value="Cadastrar"
+                                     process="@form"/>
+                    <p:commandButton action="login?faces-redirect=true" immediate="true" value="Voltar" />
                 </h:form>
             </p:tab>
-
-
-            <p:tab title="Cadastrar produtor">
+            <p:tab title="Produtor de Mídia">
                 <h:form>
-                    <p:fieldset legend="Dados produtor">
-                        <p:panelGrid columns="3">
+                        <h:panelGrid columns="3">
 
                             <p:outputLabel for="primeiroNome">Nome</p:outputLabel>
                             <p:inputText id="primeiroNome" requiredMessage="Campo obrigatório" value="#{produtorDeMidiaBean.produtor.nome}" required="true">
@@ -86,21 +79,16 @@
                                         goodLabel="#{mensagem.senhaBoa}" strongLabel="#{mensagem.senhaForte}" promptLabel="Informe a senha" required="true"/>
                             <p:message for="senha" id="messageSenha" />
 
-                        </p:panelGrid>
-                        <p:separator />
+                        </h:panelGrid>
+                        <br/>
                         <p:commandButton action="#{produtorDeMidiaBean.salvar()}" value="Cadastrar"
                                          process="@form"/>
-                    </p:fieldset>
+                        <p:commandButton action="login?faces-redirect=true" immediate="true" value="Voltar" />
                 </h:form>
             </p:tab>
-
-
-
-
-            <p:tab title="Cadastrar convidado">
+            <p:tab title="Convidado">
                 <h:form>
-                    <p:fieldset legend="Dados convidado">
-                        <p:panelGrid columns="3">
+                        <h:panelGrid columns="3">
 
                             <p:outputLabel for="primeiroNome">Nome</p:outputLabel>
                             <p:inputText id="primeiroNome" requiredMessage="Campo obrigatório" value="#{convidadoBean.convidado.nome}" required="true">
@@ -131,11 +119,11 @@
                                         goodLabel="#{mensagem.senhaBoa}" strongLabel="#{mensagem.senhaForte}" promptLabel="Informe a senha" required="true"/>
                             <p:message for="senha" id="messageSenha" />
 
-                        </p:panelGrid>
-                        <p:separator />
+                        </h:panelGrid>
+                        <br/>
                         <p:commandButton action="#{convidadoBean.salvar()}" value="Cadastrar"
                                          process="@form"/>
-                    </p:fieldset>
+                        <p:commandButton action="login?faces-redirect=true" immediate="true" value="Voltar" />
                 </h:form>
             </p:tab>
 
