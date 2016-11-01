@@ -34,7 +34,7 @@ public class Buffet implements Serializable
     private List<ComesBebes> comesBebes;
     
     //one to one bidirecional
-    @OneToOne(mappedBy = "buffet", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "buffet", fetch = FetchType.EAGER)
     private Cerimonia cerimonia;
 
     public Buffet()

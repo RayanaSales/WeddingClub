@@ -71,7 +71,7 @@ public class ComesBebesBean implements Serializable
     
     public void editar(int id)
     {
-        listar(); //atualize a minha lista   
+        //listar(); //atualize a minha lista   
         cb.setId(id);
         try
         {

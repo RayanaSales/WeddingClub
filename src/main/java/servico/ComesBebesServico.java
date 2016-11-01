@@ -42,7 +42,7 @@ public class ComesBebesServico extends Servico {
         if (existente(cb.getProduto()) == true) {
             em.merge(cb);
         } else if (existente(cb.getProduto()) == false) {
-            throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
+            throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_INEXISTENTE);
         }
     }
 

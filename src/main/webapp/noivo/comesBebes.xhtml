@@ -49,55 +49,44 @@
                 <p:dataTable id="tabelaComesBebes" editable="true" var="comesBebes" value="#{comesBebesBean.cbs}" paginator="true" rows="5" emptyMessage="Nenhum comes e bebes cadastrado">
                     <f:facet name="header">Editar Comes e bebes</f:facet>
 
-                    <p:ajax event="rowEdit" listener="#{comesBebesBean.editar(id)}"  />
+                    <p:ajax event="rowEdit" listener="#{comesBebesBean.editar}"  />
 
-                    <p:column headerText="Produtos" filterMatchMode="startsWith" filterBy="#{comesBebes.produto}" sortBy="#{comesBebes.produto}">
+                   <p:column headerText="Produto" filterMatchMode="startsWith">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{comesBebes.produto}" />
                             </f:facet>
                             <f:facet name="input">
-                                <p:inputText value="#{comesBebesBean.cb.produto}" required="true" />
+                                <p:inputText value="#{comesBebes.produto}" required="true" />
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column headerText="Quantidade" filterMatchMode="startsWith" filterBy="#{comesBebes.quantidade}" sortBy="#{comesBebes.quantidade}">
+
+                    <p:column headerText="Quantidade" filterMatchMode="startsWith">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{comesBebes.quantidade}" />
                             </f:facet>
-                            <f:facet name="input">                              
-                                <p:inputMask id="quantidade" value="#{comesBebesBean.cb.quantidade}" mask="99?999"/>                                
+                            <f:facet name="input">
+                                <p:inputMask id="quantidade" value="#{comesBebes.quantidade}" mask="99?999"/>  
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column headerText="Preço (unitário)" filterMatchMode="startsWith" filterBy="#{comesBebes.valor}" sortBy="#{comesBebes.valor}">
+
+                    <p:column headerText="Preço unitário" filterMatchMode="startsWith">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{comesBebes.valor}" />
                             </f:facet>
-                            <f:facet name="input">                              
-                                <p:inputText id="valor" value="#{comesBebesBean.cb.valor}">
-                                    <f:validateDoubleRange minimum="0.0"/>
-                                </p:inputText>
+                            <f:facet name="input">
+                                <p:inputText value="#{comesBebes.valor}" required="true" />
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column headerText="Categoria" filterMatchMode="startsWith" filterBy="#{comesBebes.categoria}" sortBy="#{comesBebes.categoria}">
-                        <p:cellEditor>
-                            <f:facet name="output">
-                                <h:outputText value="#{comesBebes.categoria}" />
-                            </f:facet>
-                            <f:facet name="input">                              
-                                <p:selectOneMenu id="categoria" value="#{comesBebesBean.cb.categoria}">
-                                    <f:selectItems value="#{comesBebesBean.cb.categoria}"   />
-                                </p:selectOneMenu>
-                            </f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column headerText="Buffet" >
-                        <h:outputText value="#{cerimonia.buffet.valorTotalGasto}"></h:outputText>
-                    </p:column>
+                    
+                    <p:column headerText="Buffet" filterMatchMode="startsWith" filterBy="#{comesBebes.valor}" sortBy="#{comesBebes.valor}">
+                        <h:outputText value="#{comesBebes.buffet.valorTotalGasto}"></h:outputText>
+                    </p:column>                   
                     <p:column>
                         <p:rowEditor />
                     </p:column>

@@ -2,7 +2,7 @@
 drop database repcasamento;
 create database repcasamento;
 
--- antes de cadastrar e logar - executa um por um
+-- depois que roda o codigo / antes de cadastrar e logar
 INSERT INTO repcasamento.GRUPO (ID,txt_nome)
 VALUES (1, 'noivo');
 INSERT INTO repcasamento.GRUPO (ID,txt_nome)
