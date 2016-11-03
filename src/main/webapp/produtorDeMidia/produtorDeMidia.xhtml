@@ -42,7 +42,7 @@
                     <br/>
                     <p:outputLabel for="cerimonia" value="Cerimônia :"/>
                     <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{produtorDeMidiaBean.produtor.cerimonia}">
-                        <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao.rua} nº #{cerimonia.localizacao.numero} - #{cerimonia.dataHora}"  />
+                        <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao} - #{cerimonia.dataHora}"  />
                     </p:selectOneMenu>
                 </h:panelGrid>   
 

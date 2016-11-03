@@ -63,8 +63,8 @@ public class BuffetBean implements Serializable
         buffet = new Buffet(); //renove a instancia, para o proximo elemento        
     }
 
-    public void editar(RowEditEvent editEvent) {
-        buffet = (Buffet) editEvent.getObject();
+    public void editar(RowEditEvent editEvent) {        
+        buffet = (Buffet) editEvent.getObject();        
         editar(buffet.getId());
     }
     

@@ -15,6 +15,10 @@
                     <p:calendar id="datetime" value="#{cerimoniaBean.cerimonia.dataHora}" pattern="yyyy/MM/dd HH:mm:ss" />
                     <p:message for="datetime" id="messageDatetime" severity="error"/>
 
+                    <p:outputLabel for="localizacao" value="Localização:" />
+                    <p:inputText id="localizacao" value="#{cerimoniaBean.cerimonia.localizacao}"/>
+                    <p:message for="localizacao" id="messageLocal" severity="error"/>
+
                     <p:outputLabel for="buffet" value="Buffet :"/>
                     <p:selectOneMenu id="buffet" converter="buffetConverter" value="#{cerimoniaBean.cerimonia.buffet}">
                         <f:selectItems value="#{buffetBean.buffets}" var="buffet" itemValue="#{buffet}" itemLabel="#{buffet.valorTotalGasto}"  />
@@ -35,7 +39,7 @@
 
                     <p:ajax event="rowEdit" listener="#{cerimoniaBean.editar}"  />
 
-                    <p:column headerText="Data" filterMatchMode="startsWith" filterBy="#{cerimonia.dataHora}" sortBy="#{cerimonia.dataHora}">
+                    <p:column headerText="Data">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{cerimonia.dataHora}"></h:outputText>
@@ -45,15 +49,22 @@
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
+                    
+                    <p:column headerText="Localização" filterMatchMode="startsWith" filterBy="#{cerimonia.localizacao}" sortBy="#{cerimonia.localizacao}">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{cerimonia.localizacao}" />
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{cerimonia.localizacao}" required="true" />
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
 
                     <p:column headerText="Buffet" >
                         <h:outputText value="#{cerimonia.buffet.valorTotalGasto}"></h:outputText>
                     </p:column>
-                    <p:column headerText="Pessoas" >
-                        <p:selectOneMenu id="pessoas" value="#{cerimonia.pessoas}">
-                            <f:selectItems value="#{cerimonia.pessoas}" var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.nome}"  />
-                        </p:selectOneMenu> 
-                    </p:column> 
+
                     <p:column>
                         <p:rowEditor />
                     </p:column>

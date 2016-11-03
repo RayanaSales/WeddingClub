@@ -61,7 +61,7 @@ public class ComesBebesBean implements Serializable
             }
         }
 
-        cb = new ComesBebes(); //renove a instancia, para o proximo elemento
+        cb = new ComesBebes(); //renove a instancia, para o proximo elemento        
     }
 
     public void editar(RowEditEvent editEvent) {
@@ -71,7 +71,7 @@ public class ComesBebesBean implements Serializable
     
     public void editar(int id)
     {
-        //listar(); //atualize a minha lista   
+        listar(); //atualize a minha lista   
         cb.setId(id);
         try
         {
@@ -88,8 +88,8 @@ public class ComesBebesBean implements Serializable
                 adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
             }
         }
-
         cb = new ComesBebes();
+        listar();
     }
 
     public void remover(ComesBebes cb)

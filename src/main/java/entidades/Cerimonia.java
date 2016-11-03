@@ -44,7 +44,7 @@ public class Cerimonia implements Serializable
             cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Pessoa> pessoas;
 
-    //colocar campo string local
+    private String localizacao;
 
     public Cerimonia()
     {
@@ -137,4 +137,14 @@ public class Cerimonia implements Serializable
         hash = 67 * hash + this.id;
         return hash;
     }
+
+    public String getLocalizacao() {
+        return localizacao;
+    }
+
+    public void setLocalizacao(String localizacao) {
+        this.localizacao = localizacao;
+    }
+    
+    
 }
