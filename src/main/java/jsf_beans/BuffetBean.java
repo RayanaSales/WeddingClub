@@ -12,6 +12,7 @@ import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.ConstraintViolationException;
 import org.primefaces.event.RowEditEvent;
@@ -64,7 +65,7 @@ public class BuffetBean implements Serializable
     }
 
     public void editar(RowEditEvent editEvent) {        
-        buffet = (Buffet) editEvent.getObject();        
+        buffet = (Buffet) editEvent.getObject();
         editar(buffet.getId());
     }
     

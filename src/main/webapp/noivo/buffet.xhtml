@@ -28,7 +28,7 @@
                 <p:dataTable id="tabelaBuffet" editable="true" var="buffet" value="#{buffetBean.buffets}" paginator="true" rows="5" emptyMessage="Nenhum buffet cadastrado">
                     <f:facet name="header">Editar Buffet</f:facet>
 
-                    <p:ajax event="rowEdit" listener="#{buffetBean.editar}"  />
+                    <p:ajax immediate="true" event="rowEdit" listener="#{buffetBean.editar}"  />
 
                     <p:column headerText="Preço" filterMatchMode="startsWith" filterBy="#{buffet.valorTotalGasto}" sortBy="#{buffet.valorTotalGasto}">
                         <p:cellEditor>

@@ -22,6 +22,8 @@
                     <p:menuitem value="Noivo" url="/faces/noivo/noivo.xhtml" rendered="#{request.isUserInRole('noivo')}"></p:menuitem>
                     <p:menuitem value="Produtor" url="/faces/produtorDeMidia/produtorDeMidia.xhtml" rendered="#{facesContext.externalContext.isUserInRole('produtorDeMidia')}"></p:menuitem>
                     <p:menuitem value="Convidado" url="/faces/convidado/convidado.xhtml" rendered="#{facesContext.externalContext.isUserInRole('convidado')}"></p:menuitem>
+                    <p:menuitem value="Convidado" url="/faces/noivo/convidado_paraNoivo.xhtml" rendered="#{facesContext.externalContext.isUserInRole('noivo')}"></p:menuitem>
+
                     <p:menuitem value="Comes e bebes" url="/faces/noivo/comesBebes.xhtml" rendered="#{facesContext.externalContext.isUserInRole('noivo')}"></p:menuitem>
                     <p:menuitem value="Sair" action="#{loginBean.logout()}" 
                                 immediate="true"
@@ -29,7 +31,7 @@
                 </p:menubar>          
             </div>
         </h:form>
-      
+
         <ui:insert></ui:insert>
     </h:body>
 </html>
