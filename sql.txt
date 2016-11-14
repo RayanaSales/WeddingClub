@@ -9,7 +9,7 @@ create table cerimonia
 (
 	id serial primary key,
 	dt_dataHora timestamp NOT NULL,
-
+        localizacao varchar(30),
 	id_buffet int references buffet(id)
 );
 

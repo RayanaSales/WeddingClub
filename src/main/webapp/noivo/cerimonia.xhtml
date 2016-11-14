@@ -11,7 +11,7 @@
             <h:form id="Cerimonia">                
                 <h:panelGrid columns="3" cellpadding="5">
 
-                    <p:outputLabel for="datetime" value="Datetime:" />
+                    <p:outputLabel for="datetime" value="Data e Hora:" />
                     <p:calendar id="datetime" value="#{cerimoniaBean.cerimonia.dataHora}" pattern="yyyy/MM/dd HH:mm:ss" />
                     <p:message for="datetime" id="messageDatetime" severity="error"/>
 
@@ -35,14 +35,12 @@
             <h:form id="formularioCerimoniaCadastradas">
                 <p:messages id="messagesEdicao" severity="error" autoUpdate="true" closable="true"/>
                 <p:dataTable id="tabelaCerimonia" editable="true" var="cerimonia" value="#{cerimoniaBean.cerimonias}" paginator="true" rows="5" emptyMessage="Nenhuma cerimônia cadastrada">
-                    <f:facet name="header">Editar Cerimônia</f:facet>
-
                     <p:ajax event="rowEdit" listener="#{cerimoniaBean.editar}"  />
 
                     <p:column headerText="Data">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{cerimonia.dataHora}"></h:outputText>
+                                <h:outputText value="#{cerimonia.dataHora}" ></h:outputText>
                             </f:facet>
                             <f:facet name="input">                              
                                 <p:calendar id="datetime" value="#{cerimoniaBean.cerimonia.dataHora}" pattern="yyyy/MM/dd HH:mm:ss" />
@@ -50,7 +48,7 @@
                         </p:cellEditor>
                     </p:column>
                     
-                    <p:column headerText="Localização" filterMatchMode="startsWith" filterBy="#{cerimonia.localizacao}" sortBy="#{cerimonia.localizacao}">
+                    <p:column headerText="Localização" sortBy="#{cerimonia.localizacao}">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{cerimonia.localizacao}" />

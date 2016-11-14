@@ -32,8 +32,8 @@
                     <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{convidadoBean.convidado.cerimonia}">
                         <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia.dataHora}"  />
                     </p:selectOneMenu>
-
-                    <br/>
+                    
+                    
                     <p:outputLabel for="categoria" value="Categoria: " />
                     <p:selectOneMenu id="categoria" value="#{convidadoBean.convidado.categoria}">
                         <f:selectItems value="#{convidadoBean.categorias}"   />

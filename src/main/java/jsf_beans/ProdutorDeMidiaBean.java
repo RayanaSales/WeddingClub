@@ -155,4 +155,20 @@ public class ProdutorDeMidiaBean implements Serializable
     {
         return ProdutorDeMidiaCategoria.values();
     }
+    
+    public String verificaCerimoniaDoProdutorLogado()
+    {
+        if(produtorLogado.getCerimonia() == null)
+        {
+            return "Você ainda não pertence a nenhuma cerimônia!";
+        }
+        else 
+        {
+          String cerimonia;
+          
+         cerimonia = produtorLogado.getCerimonia().getLocalizacao() + " - " +  produtorLogado.getCerimonia().getDataHora();
+         
+         return cerimonia;
+        }
+    }
 }

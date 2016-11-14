@@ -8,73 +8,39 @@
              xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <p:tabView id="abas">        
-         
-        <p:tab title="Gerenciar cadastro" id="painelConvidado">
+
+        <p:tab title="Seus Dados" id="painelConvidado">
             <h:form id="formularioConvidado">
-                <p:messages id="messagesEdicao" severity="error" autoUpdate="true" closable="true"/>
-                <p:dataTable id="tabelaConvidado" editable="true"  var="convidado" value="#{convidadoBean.convidados}" paginator="true" rows="5" emptyMessage="Nenhum convidado cadastrado">
-                    <f:facet name="header">Convidados</f:facet>
-                    <p:ajax event="rowEdit" listener="#{convidadoBean.editar}"  />
 
-                    <p:column headerText="Nome" filterMatchMode="startsWith" filterBy="#{convidado.nome}" sortBy="#{convidado.nome}">
-                        <p:cellEditor>
-                            <f:facet name="output">
-                                <h:outputText value="#{convidado.nome}" />
-                            </f:facet>
-                            <f:facet name="input">
-                                <p:inputText value="#{convidado.nome}" required="true" />
-                            </f:facet>
-                        </p:cellEditor>
-                    </p:column>
+                <h:panelGrid columns="2" cellpadding="5">
 
-                    <p:column headerText="E-mail" filterMatchMode="startsWith" filterBy="#{convidado.email}" sortBy="#{convidado.email}">
-                        <p:cellEditor>
-                            <f:facet name="output">
-                                <h:outputText value="#{convidado.email}" />
-                            </f:facet>
-                            <f:facet name="input">
-                                <p:inputText value="#{convidado.email}" required="true" />
-                            </f:facet>
-                        </p:cellEditor>
-                    </p:column>
+                    <p:outputLabel  for="nome" value="Nome:" />
+                    <p:outputLabel id="nome" value="#{convidadoBean.convidadoLogado.nome}" />
 
-                    <p:column headerText="Senhas" filterMatchMode="startsWith" filterBy="#{convidado.quantidadeSenhas}" sortBy="#{convidado.quantidadeSenhas}">
-                        <p:cellEditor>
-                            <f:facet name="output">
-                                <h:outputText value="#{convidado.quantidadeSenhas}" />
-                            </f:facet>
-                            <f:facet name="input">                              
-                                <p:inputMask id="quantidadeSenhas" value="#{convidado.quantidadeSenhas}" mask="9?9"/>
-                            </f:facet>
-                        </p:cellEditor>
-                    </p:column>
+                    <p:outputLabel for="email" value="Email:" />
+                    <p:outputLabel id="email" value="#{convidadoBean.convidadoLogado.email}" />
 
-                    <p:column headerText="Categoria" filterMatchMode="startsWith" filterBy="#{convidado.categoria}" sortBy="#{convidado.categoria}">
-                        <p:cellEditor>
-                            <f:facet name="output">
-                                <h:outputText value="#{convidado.categoria}" />
-                            </f:facet>
-                            <f:facet name="input">                              
-                                <p:selectOneMenu id="categoria" value="#{convidado.categoria}">
-                                    <f:selectItems value="#{convidadoBean.categorias}"   />
-                                </p:selectOneMenu>
-                            </f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column>
-                        <p:rowEditor />
-                    </p:column>
-                    <p:column>
-                        <p:commandLink styleClass="ui-icon ui-icon-trash"  action="#{convidadoBean.remover(convidado)}" process="@this" update="tabelaConvidado">
-                            <p:confirm header="Confirmação" message="Tem certeza ?" icon="ui-icon-alert" />
-                        </p:commandLink>
-                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                        </p:confirmDialog>
-                    </p:column>
-                </p:dataTable>
+                    <p:outputLabel for="quantidadeSenhas" value="Quantidade de senhas: " />
+                    <p:outputLabel id="quantidadeSenhas" value="#{convidadoBean.convidadoLogado.quantidadeSenhas}" />
+
+                    <p:outputLabel for="cerimonia" value="Cerimônia: " />
+                    <p:outputLabel id="cerimonia"  value="#{convidadoBean.verificaCerimoniaDoConvidadoLogado()}" />
+                </h:panelGrid>   
             </h:form>
+        </p:tab>
+        <p:tab title="Cerimônia">
+
+            <p:outputLabel  for="localizacao" value="Localização:" />
+            <p:outputLabel id="localizacao" value="#{convidadoBean.convidadoLogado.cerimonia.localizacao}" />
+
+            <p:outputLabel for="dataHora" value="Data e Hora:" />
+            <p:outputLabel id="dataHora" value="#{convidadoBean.convidadoLogado.cerimonia.dataHora}" />
+
+            <p:outputLabel for="buffet" value="Buffet: " />
+            <p:outputLabel id="buffet" value="#{convidadoBean.convidadoLogado.cerimonia.buffet}" />
+
+            <!-- Dar um jeito de pegar os dados dos noivos da cerimônia -->
+            
         </p:tab>
     </p:tabView>
 

@@ -51,6 +51,7 @@ public class CerimoniaBean implements Serializable
             try
             {
                 cerimoniaServico.salvar(cerimonia);
+                cerimoniaServico.atualizarNoivo((Noivo) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogado"), cerimonia);
                 adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
             } catch (ExcecaoNegocio ex)
             {
@@ -109,6 +110,11 @@ public class CerimoniaBean implements Serializable
         cerimonias = cerimoniaServico.listar();
     }
 
+    public Cerimonia cerimoniaAtual()
+    {
+     return cerimoniaServico.RetornaCerimoniaAtual();
+    }
+    
     public List<Cerimonia> getCerimonias()
     {
         listar(); //atualize a minha lista

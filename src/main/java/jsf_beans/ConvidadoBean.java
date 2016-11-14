@@ -59,6 +59,7 @@ public class ConvidadoBean implements Serializable
 
     public void salvar()
     {
+        // tem que relacionar o convidado a cerimônia do noivo
         listar(); //atualize a minha lista
 
         //setar o produtor, na lista de novasPessoas em cerimonia.
@@ -203,5 +204,21 @@ public class ConvidadoBean implements Serializable
         System.out.println("aaaaaaaaaaaa");
         Convidado c = (Convidado) event.getObject();
         System.out.println("OBJETO: " + c.getNome());
+    }
+    
+    public String verificaCerimoniaDoConvidadoLogado()
+    {
+        if(convidadoLogado.getCerimonia() == null)
+        {
+            return "Você ainda não pertence a nenhuma cerimônia!";
+        }
+        else 
+        {
+          String cerimonia;
+          
+         cerimonia = convidadoLogado.getCerimonia().getLocalizacao() + " - " +  convidadoLogado.getCerimonia().getDataHora();
+         
+         return cerimonia;
+        }
     }
 }

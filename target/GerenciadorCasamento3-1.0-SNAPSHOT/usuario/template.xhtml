@@ -21,6 +21,7 @@
                     <p:menuitem value="Cerimonia" url="/faces/noivo/cerimonia.xhtml" rendered="#{request.isUserInRole('noivo')}"></p:menuitem>
                     <p:menuitem value="Noivo" url="/faces/noivo/noivo.xhtml" rendered="#{request.isUserInRole('noivo')}"></p:menuitem>
                     <p:menuitem value="Produtor" url="/faces/produtorDeMidia/produtorDeMidia.xhtml" rendered="#{facesContext.externalContext.isUserInRole('produtorDeMidia')}"></p:menuitem>
+                    <p:menuitem value="Produtor" url="/faces/noivo/produtorDeMidia_paraNoivo.xhtml" rendered="#{facesContext.externalContext.isUserInRole('noivo')}"></p:menuitem>
                     <p:menuitem value="Convidado" url="/faces/convidado/convidado.xhtml" rendered="#{facesContext.externalContext.isUserInRole('convidado')}"></p:menuitem>
                     <p:menuitem value="Convidado" url="/faces/noivo/convidado_paraNoivo.xhtml" rendered="#{facesContext.externalContext.isUserInRole('noivo')}"></p:menuitem>
 
