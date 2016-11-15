@@ -8,7 +8,7 @@
              xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <p:tabView id="abas">       
-        <p:tab title="Cadastrar" id="painelCadastroProdutorDeMidia">
+        <p:tab rendered="#{noivoBean.noivoLogado.cerimonia != null}" title="Cadastrar" id="painelCadastroProdutorDeMidia">
             <h:form id="cadastroProdutorDeMidia">                
                 <h:panelGrid columns="3" cellpadding="5">
                     <p:outputLabel for="nome" value="Nome:" />
@@ -39,11 +39,6 @@
                         <f:selectItems value="#{produtorDeMidiaBean.categorias}"   />
                     </p:selectOneMenu>
 
-                    <br/>
-                    <p:outputLabel for="cerimonia" value="Cerimônia :"/>
-                    <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{produtorDeMidiaBean.produtor.cerimonia}">
-                        <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao} - #{cerimonia.dataHora}"  />
-                    </p:selectOneMenu>
                 </h:panelGrid>   
 
                 <p:toolbarGroup>
@@ -52,7 +47,7 @@
                 </p:toolbarGroup>
             </h:form>   
         </p:tab>
-        <p:tab title="Equipe de Mídia" id="equipeMidia">
+        <p:tab  rendered="#{noivoBean.noivoLogado.cerimonia != null}" title="Equipe de Mídia" id="equipeMidia">
             <h:form id="formularioEquipeMidias">
                 <p:messages id="messagesEdicao" severity="error" autoUpdate="true" closable="true"/>
                 <p:dataTable id="tabelaProdutor" editable="true"  var="produtor" value="#{produtorDeMidiaBean.produtores}" paginator="true" rows="5" emptyMessage="Nenhum produtor cadastrado">
@@ -132,6 +127,11 @@
                     </p:column>
                 </p:dataTable>
             </h:form>
+        </p:tab>
+         <p:tab title="Não é possível cadastrar produtores" rendered="#{noivoBean.noivoLogado.cerimonia == null}">
+            <p:outputLabel  value="Você não tem cerimônia cadastrada!" />
+            
+          
         </p:tab>
     </p:tabView>
 

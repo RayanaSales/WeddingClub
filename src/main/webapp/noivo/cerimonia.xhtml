@@ -6,8 +6,8 @@
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
              xmlns:f="http://xmlns.jcp.org/jsf/core"
              template="../usuario/template.xhtml">     
-    <p:tabView id="abas">  
-        <p:tab title="Cadastrar" id="painelCerimonia">
+    <p:tabView  id="abas">  
+        <p:tab  rendered="#{noivoBean.noivoLogado.cerimonia == null}" title="Cadastrar" id="painelCerimonia">
             <h:form id="Cerimonia">                
                 <h:panelGrid columns="3" cellpadding="5">
 
@@ -31,10 +31,10 @@
                 </p:toolbarGroup>               
             </h:form>   
         </p:tab>
-        <p:tab title="Editar" id="painelEditarCerimonia">
-            <h:form id="formularioCerimoniaCadastradas">
+        <p:tab rendered="#{noivoBean.noivoLogado.cerimonia != null}" title="Editar" id="painelEditarCerimonia">
+            <h:form  id="formularioCerimoniaCadastradas">
                 <p:messages id="messagesEdicao" severity="error" autoUpdate="true" closable="true"/>
-                <p:dataTable id="tabelaCerimonia" editable="true" var="cerimonia" value="#{cerimoniaBean.cerimonias}" paginator="true" rows="5" emptyMessage="Nenhuma cerimônia cadastrada">
+                <p:dataTable id="tabelaCerimonia" editable="true" var="cerimonia" value="#{cerimoniaBean.cerimoniaAtual()}" paginator="true" rows="5" emptyMessage="Nenhuma cerimônia cadastrada">
                     <p:ajax event="rowEdit" listener="#{cerimoniaBean.editar}"  />
 
                     <p:column headerText="Data">

@@ -28,7 +28,7 @@
                 </h:panelGrid>   
             </h:form>
         </p:tab>
-        <p:tab title="Cerimônia">
+        <p:tab rendered="#{convidadoBean.convidadoLogado.cerimonia != null}" title="Cerimônia">
 
             <p:outputLabel  for="localizacao" value="Localização:" />
             <p:outputLabel id="localizacao" value="#{convidadoBean.convidadoLogado.cerimonia.localizacao}" />

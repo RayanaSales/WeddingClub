@@ -53,10 +53,12 @@ public class ProdutorDeMidiaBean implements Serializable
 
     public void salvar()
     {
+         Noivo noivoAtual = (Noivo) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogado");
+        
         listar(); //atualize a minha lista
 
         //seta o produto na cerimonia
-        Cerimonia cerimonia = produtor.getCerimonia();
+        Cerimonia cerimonia = noivoAtual.getCerimonia();
         List<Pessoa> novasPessoas = new ArrayList<>();
         novasPessoas.add(produtor);
         if (cerimonia != null)
