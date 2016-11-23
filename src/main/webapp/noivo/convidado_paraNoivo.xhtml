@@ -12,33 +12,40 @@
             <h:form id="Convidado">                
                 <h:panelGrid columns="3" cellpadding="5">
 
-                    <p:outputLabel for="nome" value="Nome:" />
-                    <p:inputText id="nome" value="#{convidadoBean.convidado.nome}"/>
-                    <p:message for="nome" id="messageDatetime" severity="error"/>
+                    <p:outputLabel for="primeiroNome">Nome</p:outputLabel>
+                    <p:inputText id="primeiroNome" requiredMessage="Campo obrigatório" value="#{convidadoBean.convidado.nome}" required="true">
+                        <f:validateLength minimum="3" maximum="30"/>
+                        <f:ajax execute="primeiroNome" render="messagePrimeiroNome" />
+                    </p:inputText>
+                    <p:message for="primeiroNome" id="messagePrimeiroNome"/>
 
-                    <p:outputLabel for="email" value="Email:" />
-                    <p:inputText id="email" value="#{convidadoBean.convidado.email}"/>
-                    <p:message for="email" id="messageEmail" severity="error"/>
+                    <p:outputLabel for="email">E-mail</p:outputLabel>
+                    <p:inputText id="email" requiredMessage="Campo obrigatório" value="#{convidadoBean.convidado.email}" required="true">
+                        <f:validateLength minimum="5" maximum="30"/>
+                        <f:ajax execute="email" render="messageEmail" />
+                    </p:inputText>
+                    <p:message for="email" id="messageEmail"/>
 
-                    <p:outputLabel for="senha" value="Senha:" />
-                    <p:password id="senha" value="#{convidadoBean.convidado.senha}" feedback="true"/>
-                    <p:message for="senha" id="messageSenha" severity="error"/>
+                    <p:outputLabel for="quantidadeSenhas">Quantidade de senhas</p:outputLabel>
+                    <p:inputMask id="quantidadeSenhas" value="#{convidadoBean.convidado.quantidadeSenhas}" mask="9?9" required="true"/>
+                    <p:message for="quantidadeSenhas" id="messageSenhas"/>
 
-                    <p:outputLabel for="quantidadeSenhas" value="Quantidade de senhas: " />
-                    <p:inputMask id="quantidadeSenhas" value="#{convidadoBean.convidado.quantidadeSenhas}" mask="9?9"/>
-                    <p:message for="quantidadeSenhas" id="messageSenhas" severity="error"/>
-
-                    <p:outputLabel for="categoria" value="Categoria: " />
-                    <p:selectOneMenu id="categoria" value="#{convidadoBean.convidado.categoria}">
+                    <p:outputLabel for="categoria">Convidado</p:outputLabel>
+                    <p:selectOneMenu id="categoria" value="#{convidadoBean.convidado.categoria}" required="true">
                         <f:selectItems value="#{convidadoBean.categorias}"   />
                     </p:selectOneMenu>
+                    <p:message for="categoria" id="messageConvidado"/>
 
-                </h:panelGrid>   
+                    <p:outputLabel value="Senha" />
+                    <p:password feedback="true" value="#{convidadoBean.convidado.senha}" requiredMessage="Campo obrigatório" id="senha" weakLabel="#{mensagem.senhaFraca}"
+                                goodLabel="#{mensagem.senhaBoa}" strongLabel="#{mensagem.senhaForte}" promptLabel="Informe a senha" required="true"/>
+                    <p:message for="senha" id="messageSenha" />
 
+                </h:panelGrid>
+                <br/>
                 <p:toolbarGroup>
-                    <p:commandButton action="#{convidadoBean.salvar()}" value="Salvar" ajax="false" update="@form" 
-                                     title="Salvar" icon="ui-icon-check" validateClient="false"/>                
-                </p:toolbarGroup>
+                    <p:commandButton action="#{convidadoBean.salvar()}" value="Salvar"
+                                     process="@form"/>                </p:toolbarGroup>
 
             </h:form>   
         </p:tab>       
@@ -110,16 +117,16 @@
         </p:tab>
         <p:tab title="Não é possível cadastrar convidados" rendered="#{noivoBean.noivoLogado.cerimonia == null}">
             <p:outputLabel  value="Você não tem cerimônia cadastrada!" />
-            
+
         </p:tab>
         <p:tab title="Adicionar convidados já cadastrados" rendered="#{noivoBean.noivoLogado.cerimonia != null}">
-           
+
             <p:outputLabel for="convidado" value="Convidados :"/>
             <p:selectOneMenu id="convidado" converter="pessoaConverter" value="#{convidadoBean.convidado}">
-                    <f:selectItems value="#{convidadoBean.convidados}" var="convidado" itemValue="#{convidado.email}"  />
-                </p:selectOneMenu>
+                <f:selectItems value="#{convidadoBean.convidados}" var="convidado" itemValue="#{convidado.email}"  />
+            </p:selectOneMenu>
             <p:commandButton action="#{convidadoBean.adicionarACerimonia()}" value="Adicionar" 
-                                        />
+                             />
         </p:tab>
     </p:tabView>
 </ui:decorate>

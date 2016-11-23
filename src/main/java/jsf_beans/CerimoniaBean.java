@@ -97,6 +97,7 @@ public class CerimoniaBean implements Serializable {
     }
 
     public void listar() {
+        
         cerimonias = cerimoniaServico.listar();
     }
 

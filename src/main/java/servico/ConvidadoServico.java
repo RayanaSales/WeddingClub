@@ -1,5 +1,6 @@
 package servico;
 
+import entidades.Cerimonia;
 import entidades.Convidado;
 import excecao.ExcecaoNegocio;
 import java.util.List;
@@ -33,9 +34,10 @@ public class ConvidadoServico extends Servico
         }
     }
 
-    public List<Convidado> listar()
+    public List<Convidado> listar(Cerimonia c)
     {
-        TypedQuery<Convidado> query = em.createQuery("SELECT c FROM Convidado c", Convidado.class);
+        TypedQuery<Convidado> query = em.createQuery("SELECT c FROM Convidado c WHERE c.cerimonia = ?1", Convidado.class);
+        query.setParameter(1, c);
         List<Convidado> convidado = query.getResultList();
 
         return convidado;
@@ -59,10 +61,10 @@ public class ConvidadoServico extends Servico
         }
     }
 
-    public boolean existente(Convidado convidado)
+    public boolean existente(Convidado convidado, Cerimonia c)
     {
         em.flush();
-        return listar().contains(convidado);
+        return listar(c).contains(convidado);
     }
 
     private boolean existente(String email)

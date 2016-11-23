@@ -46,7 +46,10 @@ public class ConvidadoBean implements Serializable {
     }
 
     public void listar() {
-        convidados = convidadoServico.listar();
+        
+        Noivo noivoAtual = (Noivo) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogado");
+
+        convidados = convidadoServico.listar(noivoAtual.getCerimonia());
     }
 
     public List<Convidado> getConvidados() {
@@ -57,36 +60,46 @@ public class ConvidadoBean implements Serializable {
     public void salvar() {
         Noivo noivoAtual = (Noivo) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogado");
 
-        // tem que relacionar o convidado a cerimônia do noivo
-        listar(); //atualize a minha lista
+        // Quando é realizado o cadastro inicial no sistema
+        if (noivoAtual != null) {
 
-        //setar o produtor, na lista de novasPessoas em cerimonia.
-        Cerimonia cerimonia = noivoAtual.getCerimonia();
-        List<Pessoa> novasPessoas = new ArrayList<>();
-        novasPessoas.add(convidado);
+            listar(); //atualize a minha lista
 
-        if (cerimonia != null) {
-            cerimonia.setPessoas(novasPessoas);
-        }
-        convidado.setCerimonia(cerimonia);
+            //setar o produtor, na lista de novasPessoas em cerimonia.
+            Cerimonia cerimonia = noivoAtual.getCerimonia();
+            List<Pessoa> novasPessoas = new ArrayList<>();
+            novasPessoas.add(convidado);
 
-        //criptografa senha
-        String senha = convidado.getSenha();
-        convidado.setNumeroAleatorio(encripta.Sorteia());
-        senha = encripta.encriptar(senha, convidado.getNumeroAleatorio());
-        convidado.setSenha(senha);
-
-        try {
-            convidadoServico.salvar(convidado);
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
-        } catch (ExcecaoNegocio ex) {
-            adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
-        } catch (EJBException ex) {
-            if (ex.getCause() instanceof ConstraintViolationException) {
-                MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
-                adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
+            if (cerimonia != null) {
+                cerimonia.setPessoas(novasPessoas);
             }
+            convidado.setCerimonia(cerimonia);
         }
+        else 
+        {
+            List<Pessoa> novasPessoas = new ArrayList<>();
+            novasPessoas.add(convidado);
+
+        }
+
+            //criptografa senha
+            String senha = convidado.getSenha();
+            convidado.setNumeroAleatorio(encripta.Sorteia());
+            senha = encripta.encriptar(senha, convidado.getNumeroAleatorio());
+            convidado.setSenha(senha);
+
+            try {
+                convidadoServico.salvar(convidado);
+                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
+            } catch (ExcecaoNegocio ex) {
+                adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
+            } catch (EJBException ex) {
+                if (ex.getCause() instanceof ConstraintViolationException) {
+                    MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
+                    adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
+                }
+            }
+        
 
         convidado = new Convidado(); //renove a instancia, para o proximo elemento
     }
