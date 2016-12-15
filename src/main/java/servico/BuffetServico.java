@@ -1,6 +1,8 @@
 package servico;
 
 import entidades.Buffet;
+import entidades.Cerimonia;
+import entidades.Convidado;
 import excecao.ExcecaoNegocio;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -8,6 +10,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 @Stateless
@@ -27,10 +30,13 @@ public class BuffetServico extends Servico
         }
     }
 
-    public List<Buffet> listar()
+    public List<Buffet> listar(Cerimonia c)
     {
         em.flush();
-        return em.createQuery("select t from Buffet t", Buffet.class).getResultList();
+        TypedQuery<Buffet> query = em.createQuery("select t from Buffet t WHERE t.cerimonia = ?1", Buffet.class);
+        query.setParameter(1, c);
+        
+        return query.getResultList();
     }
 
     public List<Buffet> listarComComesBebes()

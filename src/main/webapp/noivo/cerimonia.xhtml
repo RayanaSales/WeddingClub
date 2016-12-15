@@ -19,10 +19,6 @@
                     <p:inputText id="localizacao" value="#{cerimoniaBean.cerimonia.localizacao}"/>
                     <p:message for="localizacao" id="messageLocal" severity="error"/>
 
-                    <p:outputLabel for="buffet" value="Buffet :"/>
-                    <p:selectOneMenu id="buffet" converter="buffetConverter" value="#{cerimoniaBean.cerimonia.buffet}">
-                        <f:selectItems value="#{buffetBean.buffets}" var="buffet" itemValue="#{buffet}" itemLabel="#{buffet.valorTotalGasto}"  />
-                    </p:selectOneMenu>
                 </h:panelGrid>   
 
                 <p:toolbarGroup>

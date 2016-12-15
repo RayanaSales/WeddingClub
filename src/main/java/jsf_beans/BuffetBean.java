@@ -3,6 +3,7 @@ package jsf_beans;
 import entidades.Buffet;
 import entidades.Cerimonia;
 import entidades.Convidado;
+import entidades.Noivo;
 import excecao.ExcecaoNegocio;
 import excecao.MensagemExcecao;
 import java.io.Serializable;
@@ -41,12 +42,19 @@ public class BuffetBean implements Serializable
 
     public void salvar()
     {
+        
         listar();
+        Noivo noivoAtual = (Noivo) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogado");
 
         try
         {
-            //buffet.setId(0);
+           
             buffetServico.salvar(buffet);
+            
+            // Atualizar o id do buffet da cerimonia
+             noivoAtual.getCerimonia().setBuffet(buffet);
+            cerimoniaServico.atualizar(noivoAtual.getCerimonia());
+            
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
         } catch (ExcecaoNegocio ex)
         {
@@ -126,7 +134,8 @@ public class BuffetBean implements Serializable
 
     public void listar()
     {
-        buffets = buffetServico.listar();
+        Noivo noivoAtual = (Noivo) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogado");
+        buffets = buffetServico.listar(noivoAtual.getCerimonia());
     }
 
     public List<Buffet> getBuffets()

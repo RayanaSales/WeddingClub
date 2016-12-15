@@ -7,7 +7,7 @@
              xmlns:f="http://xmlns.jcp.org/jsf/core"
              template="../usuario/template.xhtml">     
     <p:tabView id="abas">  
-        <p:tab title="Cadastrar" id="painelCadastroBuffet">
+        <p:tab title="Cadastrar" rendered="#{noivoBean.noivoLogado.cerimonia != null}" id="painelCadastroBuffet">
             <h:form id="buffet">                
                     <h:panelGrid columns="3" cellpadding="5">
                         <p:outputLabel for="valor" value="Valor:" />
@@ -22,7 +22,7 @@
                     </p:toolbarGroup>                
             </h:form>   
         </p:tab>
-        <p:tab title="Editar" id="painelEditarBuffet">
+        <p:tab title="Editar"  rendered="#{noivoBean.noivoLogado.cerimonia != null}" id="painelEditarBuffet">
             <h:form id="formularioBuffetsCadastrados">
                 <p:messages id="messagesEdicao" severity="error" autoUpdate="true" closable="true"/>
                 <p:dataTable id="tabelaBuffet" editable="true" var="buffet" value="#{buffetBean.buffets}" paginator="true" rows="5" emptyMessage="Nenhum buffet cadastrado">
@@ -30,7 +30,7 @@
 
                     <p:ajax immediate="true" event="rowEdit" listener="#{buffetBean.editar}"  />
 
-                    <p:column headerText="Preço" filterMatchMode="startsWith" filterBy="#{buffet.valorTotalGasto}" sortBy="#{buffet.valorTotalGasto}">
+                    <p:column headerText="Preço" >
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{buffet.valorTotalGasto}" />
@@ -42,10 +42,10 @@
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column headerText="Cerimônia" filterMatchMode="startsWith" filterBy="#{buffet.cerimonia}" sortBy="#{buffet.cerimonia.dataHora}">
+                    <p:column headerText="Cerimônia">
                         <h:outputText value="#{buffet.cerimonia.dataHora}"></h:outputText>
                     </p:column>
-                    <p:column headerText="Comes e Bebes" filterMatchMode="startsWith" filterBy="#{buffet.comesBebes}" sortBy="#{buffet.comesBebes}">
+                    <p:column headerText="Comes e Bebes">
                         <p:selectOneMenu id="comesBebes" >
                             <f:selectItems value="#{buffet.comesBebes}" var="comesBebes" itemValue="#{comesBebes}" itemLabel="#{comesBebes.produto}"  />
                         </p:selectOneMenu> 
@@ -65,5 +65,10 @@
                 </p:dataTable>
             </h:form>
         </p:tab>
+          <p:tab title="Não é possível cadastrar buffet" rendered="#{noivoBean.noivoLogado.cerimonia == null}">
+            <p:outputLabel  value="Você não tem cerimônia cadastrada!" />
+
+        </p:tab>
+
     </p:tabView>
 </ui:decorate>

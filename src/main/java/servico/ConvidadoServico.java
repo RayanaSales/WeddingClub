@@ -34,7 +34,7 @@ public class ConvidadoServico extends Servico
         }
     }
 
-    public List<Convidado> listar(Cerimonia c)
+    public List<Convidado> listarConvidadosDaCerimoniaAtual(Cerimonia c)
     {
         TypedQuery<Convidado> query = em.createQuery("SELECT c FROM Convidado c WHERE c.cerimonia = ?1", Convidado.class);
         query.setParameter(1, c);
@@ -43,6 +43,14 @@ public class ConvidadoServico extends Servico
         return convidado;
     }
 
+    public List<Convidado> listar()
+    {
+        TypedQuery<Convidado> query = em.createQuery("SELECT c FROM Convidado c", Convidado.class);
+        List<Convidado> convidado = query.getResultList();
+
+        return convidado;
+    }
+    
     public void remover(Convidado convidado)
     {
         Convidado c = (Convidado) em.find(Convidado.class, convidado.getId()); //se n tiver isso, o jpa acha que n deatachou        
@@ -61,10 +69,10 @@ public class ConvidadoServico extends Servico
         }
     }
 
-    public boolean existente(Convidado convidado, Cerimonia c)
+    public boolean existente(Convidado convidado)
     {
         em.flush();
-        return listar(c).contains(convidado);
+        return listar().contains(convidado);
     }
 
     private boolean existente(String email)

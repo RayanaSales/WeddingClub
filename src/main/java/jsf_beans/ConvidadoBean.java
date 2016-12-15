@@ -35,6 +35,7 @@ public class ConvidadoBean implements Serializable {
     private ConvidadoServico convidadoServico;
 
     public List<Convidado> convidados;
+    public List<Convidado> convidadosDaCerimonia;
     public Convidado convidado;
     public Convidado convidadoLogado;
     Encripta encripta;
@@ -43,20 +44,28 @@ public class ConvidadoBean implements Serializable {
         convidado = new Convidado();
         convidadoLogado = new Convidado();
         encripta = new Encripta();
-    }
+     }
 
     public void listar() {
+       
+        convidados = convidadoServico.listar();
+    }
+
+    public List<Convidado> getConvidadosDaCerimonia() {
+        listarConvidadosDaCerimoniaAtual(); //atualize a minha lista
+        return convidadosDaCerimonia;
+    }
+
+     public void listarConvidadosDaCerimoniaAtual() {
         
         Noivo noivoAtual = (Noivo) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogado");
 
-        convidados = convidadoServico.listar(noivoAtual.getCerimonia());
+        convidadosDaCerimonia = convidadoServico.listarConvidadosDaCerimoniaAtual(noivoAtual.getCerimonia());
     }
-
     public List<Convidado> getConvidados() {
         listar(); //atualize a minha lista
         return convidados;
     }
-
     public void salvar() {
         Noivo noivoAtual = (Noivo) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogado");
 
@@ -104,8 +113,9 @@ public class ConvidadoBean implements Serializable {
         convidado = new Convidado(); //renove a instancia, para o proximo elemento
     }
 
-    public void editar(RowEditEvent editEvent) {
-        convidado = (Convidado) editEvent.getObject();
+   public void editar(RowEditEvent event) {
+       convidado = (Convidado) event.getObject();
+     //  this.convidado = convidado;
         editar(convidado.getId());
     }
 
