@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="../usuario/template.xhtml"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:tabView id="abas">        
+
+        <p:tab title="Seus Dados" id="painelConvidado">
+            <h:form id="formularioConvidado">
+
+                <h:panelGrid columns="2" cellpadding="5">
+
+                    <p:outputLabel  for="nome" value="Nome:" />
+                    <p:outputLabel id="nome" value="#{convidadoBean.convidadoLogado.nome}" />
+
+                    <p:outputLabel for="email" value="Email:" />
+                    <p:outputLabel id="email" value="#{convidadoBean.convidadoLogado.email}" />
+
+                    <p:outputLabel for="quantidadeSenhas" value="Quantidade de senhas: " />
+                    <p:outputLabel id="quantidadeSenhas" value="#{convidadoBean.convidadoLogado.quantidadeSenhas}" />
+
+                    <p:outputLabel for="cerimonia" value="Cerimônia: " />
+                    <p:outputLabel id="cerimonia"  value="#{convidadoBean.verificaCerimoniaDoConvidadoLogado()}" />
+                </h:panelGrid>   
+            </h:form>
+        </p:tab>
+        <p:tab rendered="#{convidadoBean.convidadoLogado.cerimonia != null}" title="Cerimônia">
+
+            <p:outputLabel  for="localizacao" value="Localização:" />
+            <p:outputLabel id="localizacao" value="#{convidadoBean.convidadoLogado.cerimonia.localizacao}" />
+
+            <p:outputLabel for="dataHora" value="Data e Hora:" />
+            <p:outputLabel id="dataHora" value="#{convidadoBean.convidadoLogado.cerimonia.dataHora}" />
+
+            <p:outputLabel for="buffet" value="Buffet: " />
+            <p:outputLabel id="buffet" value="#{convidadoBean.convidadoLogado.cerimonia.buffet}" />
+
+            <!-- Dar um jeito de pegar os dados dos noivos da cerimônia -->
+            
+        </p:tab>
+    </p:tabView>
+
+</ui:decorate>

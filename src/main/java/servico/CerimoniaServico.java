@@ -1,5 +1,6 @@
 package servico;
 
+import entidades.Buffet;
 import entidades.Cerimonia;
 import entidades.Noivo;
 import excecao.ExcecaoNegocio;
@@ -94,4 +95,6 @@ public class CerimoniaServico extends Servico
 
         return true;
     }
+    
+    
 }

@@ -1,0 +1,8 @@
+.menubar {
+     border: none;
+}
+
+.menuitem {
+   
+   align-self: flex-end;
+}

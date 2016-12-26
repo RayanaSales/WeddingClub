@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @SequenceGenerator(name = "BUFFET_SEQUENCE", sequenceName = "BUFFET_SEQUENCE", allocationSize = 1, initialValue = 1)
@@ -23,11 +25,15 @@ public class Buffet implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BUFFET_SEQUENCE")
     private int id;
-
+    
     @NotNull
-    @validadores.ValidaPreco
-    @Column(name = "numero_valorTotal")
-    private double valorTotalGasto; //chave secundaria
+    @Size(min = 3, max = 40)
+    @Column(name = "txt_nome")
+    private String nome;    
+    
+//    @validadores.ValidaPreco
+//    @Column(name = "numero_valorTotal")
+//    private double valorTotalGasto; //chave secundaria
 
     @OneToMany(mappedBy = "buffet", fetch = FetchType.EAGER,
             cascade = CascadeType.MERGE, orphanRemoval = true)
@@ -44,7 +50,7 @@ public class Buffet implements Serializable
 
     public Buffet(double valorTotalGasto)
     {
-        this.valorTotalGasto = valorTotalGasto;
+        //this.valorTotalGasto = valorTotalGasto;
         comesBebes = new ArrayList<>();
     }
 
@@ -57,16 +63,33 @@ public class Buffet implements Serializable
     {
         this.id = id;
     }
-
-    public double getValorTotalGasto()
-    {
-        return valorTotalGasto;
+    
+    
+    public String getNome() {
+        return nome;
     }
 
-    public void setValorTotalGasto(double valorTotalGasto)
-    {
-        this.valorTotalGasto = valorTotalGasto;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
+
+//    public double getValorTotalGasto()
+//    {        
+//        if(!comesBebes.isEmpty()){   
+//            double valorTotalGasto = 0.0;
+//            for(ComesBebes cb : comesBebes){
+//                valorTotalGasto += cb.getValor();
+//            }            
+//            return valorTotalGasto;
+//        }
+//        
+//        return 0.0;
+//    }
+
+//    public void setValorTotalGasto(double valorTotalGasto)
+//    {
+//        this.valorTotalGasto = valorTotalGasto;
+//    }
 
     public void setComesBebes(List<ComesBebes> ComesBebesNovos)
     {
@@ -117,9 +140,9 @@ public class Buffet implements Serializable
             {
                 Buffet outra = (Buffet) o;
 
-                if (Objects.equals(this.valorTotalGasto, outra.valorTotalGasto)) //confere atributos
+                if (Objects.equals(this.nome, outra.nome)) //confere atributos
                 {                   
-                    return true; //qd descomentar o de cima, tira essa linha
+                    return true; 
                 }
             }
         }
@@ -133,4 +156,7 @@ public class Buffet implements Serializable
         hash = 29 * hash + this.id;
         return hash;
     }
+
+    
+    
 }

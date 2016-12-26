@@ -1,5 +1,6 @@
 package servico;
 
+import entidades.Buffet;
 import entidades.ComesBebes;
 import excecao.ExcecaoNegocio;
 import java.util.List;
@@ -26,6 +27,15 @@ public class ComesBebesServico extends Servico {
 
     public List<ComesBebes> listar() {
         return em.createQuery("select t from ComesBebes t", ComesBebes.class).getResultList();
+    }
+    
+    public List<ComesBebes> listarTodosBuffet(int idBuffet) {
+        TypedQuery<ComesBebes> query;
+        query = em.createQuery("select b from ComesBebes b where b.buffet.id = ?1", ComesBebes.class);
+        query.setParameter(1, idBuffet);
+        List<ComesBebes> cbs = query.getResultList();
+        
+        return cbs;
     }
 
     public void remover(ComesBebes cb) throws ExcecaoNegocio {

@@ -2,6 +2,7 @@ package jsf_beans;
 
 import entidades.Buffet;
 import entidades.Cerimonia;
+import entidades.ComesBebes;
 import entidades.Convidado;
 import entidades.Noivo;
 import excecao.ExcecaoNegocio;
@@ -19,14 +20,17 @@ import javax.validation.ConstraintViolationException;
 import org.primefaces.event.RowEditEvent;
 import servico.BuffetServico;
 import servico.CerimoniaServico;
+import servico.ComesBebesServico;
 
 @ManagedBean
 @SessionScoped
 public class BuffetBean implements Serializable
 {
-
     @EJB
     private BuffetServico buffetServico;
+    
+    @EJB
+    private ComesBebesServico comesBebesServico;
 
     @EJB
     private CerimoniaServico cerimoniaServico;
@@ -171,5 +175,15 @@ public class BuffetBean implements Serializable
             }
         }
         return false;
+    }
+        
+    public double calcularValorTotalGasto(int idBuffet){
+        List<ComesBebes> cbs = comesBebesServico.listarTodosBuffet(idBuffet);
+        
+        double valorTotal = 0.0;
+        for(ComesBebes cb : cbs){
+            valorTotal += cb.getQuantidade() * cb.getValor();
+        }
+        return valorTotal;
     }
 }

@@ -5,12 +5,12 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2016-11-14T01:31:46")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2016-12-26T20:46:22")
 @StaticMetamodel(ProdutorDeMidia.class)
 public class ProdutorDeMidia_ extends Pessoa_ {
 
+    public static volatile SingularAttribute<ProdutorDeMidia, ProdutorDeMidiaCategoria> categoria;
     public static volatile SingularAttribute<ProdutorDeMidia, Double> preco;
     public static volatile SingularAttribute<ProdutorDeMidia, String> linkParaRedeSocial;
-    public static volatile SingularAttribute<ProdutorDeMidia, ProdutorDeMidiaCategoria> categoria;
 
 }

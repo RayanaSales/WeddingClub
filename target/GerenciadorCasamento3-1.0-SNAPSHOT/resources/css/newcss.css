@@ -1,0 +1,12 @@
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background-image: url("imagens/ring1.jpg");  
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.layoutlogin {
+      	width: 200px !important;
+	margin: 250px auto !important;
+}
