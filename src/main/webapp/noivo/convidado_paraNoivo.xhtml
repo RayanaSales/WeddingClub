@@ -52,7 +52,7 @@
         <p:tab  rendered="#{noivoBean.noivoLogado.cerimonia != null}" title="Seus convidados" id="painelConvidado">
             <h:form id="formularioConvidado">
                 <p:messages id="messagesEdicao" severity="error" autoUpdate="true" closable="true"/>
-                <p:dataTable id="tabelaConvidado" editable="true"  var="convidado" value="#{convidadoBean.convidados}" paginator="true" rows="5" emptyMessage="Nenhum convidado cadastrado">
+                <p:dataTable id="tabelaConvidado" editable="true"  var="convidado" value="#{convidadoBean.convidadosDaCerimonia}" paginator="true" rows="5" emptyMessage="Nenhum convidado cadastrado">
                     <f:facet name="header">Convidados</f:facet>
                     <p:ajax event="rowEdit" listener="#{convidadoBean.editar}"  />
 
@@ -115,18 +115,5 @@
                 </p:dataTable>
             </h:form>
         </p:tab>
-        <p:tab title="Não é possível cadastrar convidados" rendered="#{noivoBean.noivoLogado.cerimonia == null}">
-            <p:outputLabel  value="Você não tem cerimônia cadastrada!" />
-
-        </p:tab>
-        <p:tab title="Adicionar convidados já cadastrados" rendered="#{noivoBean.noivoLogado.cerimonia != null}">
-
-            <p:outputLabel for="convidado" value="Convidados :"/>
-            <p:selectOneMenu id="convidado" converter="pessoaConverter" value="#{convidadoBean.convidado}">
-                <f:selectItems value="#{convidadoBean.convidados}" var="convidado" itemValue="#{convidado.email}"  />
-            </p:selectOneMenu>
-            <p:commandButton action="#{convidadoBean.adicionarACerimonia()}" value="Adicionar" 
-                             />
-        </p:tab>
-    </p:tabView>
+       </p:tabView>
 </ui:decorate>

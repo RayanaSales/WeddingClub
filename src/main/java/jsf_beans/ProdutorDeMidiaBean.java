@@ -29,17 +29,28 @@ public class ProdutorDeMidiaBean implements Serializable
     public ProdutorDeMidiaServico produtorServico;
 
     public List<ProdutorDeMidia> produtores;
+    public List<ProdutorDeMidia> produtoresDaCerimonia;
+
     public ProdutorDeMidia produtor;
     public ProdutorDeMidia produtorLogado;
     Encripta encripta;
 
     public ProdutorDeMidiaBean()
     {
+        produtoresDaCerimonia = new ArrayList<>();
         produtor = new ProdutorDeMidia();
         produtorLogado = new ProdutorDeMidia();
         encripta = new Encripta();
     }
+   
+    public List<ProdutorDeMidia> getProdutoresDaCerimonia() {
+        listarProdutorDeMidiaDaCerimoniaAtual();
+        return produtoresDaCerimonia;
+    }
 
+    public void setProdutoresDaCerimonia(List<ProdutorDeMidia> produtoresDaCerimonia) {
+        this.produtoresDaCerimonia = produtoresDaCerimonia;
+    }
     protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem)
     {
         FacesMessage message = new FacesMessage(severity, mensagem, "");
@@ -92,6 +103,37 @@ public class ProdutorDeMidiaBean implements Serializable
         produtor = new ProdutorDeMidia(); //renove a instancia, para o proximo elemento
     }
 
+    
+    
+     public void salvarPublico()
+    {
+         Noivo noivoAtual = (Noivo) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogado");
+       
+        //criptografa senha
+        String senha = produtor.getSenha();
+        produtor.setNumeroAleatorio(encripta.Sorteia());
+        senha = encripta.encriptar(senha, produtor.getNumeroAleatorio());
+        produtor.setSenha(senha);
+
+        try
+        {
+            produtorServico.salvar(produtor);
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
+        } catch (ExcecaoNegocio ex)
+        {
+            adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
+        } catch (EJBException ex)
+        {
+            if (ex.getCause() instanceof ConstraintViolationException)
+            {
+                MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
+                adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
+            }
+        }
+
+        produtor = new ProdutorDeMidia(); //renove a instancia, para o proximo elemento
+    }
+    
     public void editar(RowEditEvent editEvent) {
         produtor = (ProdutorDeMidia) editEvent.getObject();
         editar(produtor.getId());
@@ -157,7 +199,13 @@ public class ProdutorDeMidiaBean implements Serializable
     {
         return ProdutorDeMidiaCategoria.values();
     }
-    
+     public void listarProdutorDeMidiaDaCerimoniaAtual() {
+        
+        Noivo noivoAtual = (Noivo) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogado");
+        
+       produtoresDaCerimonia = produtorServico.listarConvidadosDaCerimoniaAtual(noivoAtual.getCerimonia());
+
+    }
     public String verificaCerimoniaDoProdutorLogado()
     {
         if(produtorLogado.getCerimonia() == null)

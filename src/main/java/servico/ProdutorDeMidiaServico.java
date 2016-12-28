@@ -1,5 +1,6 @@
 package servico;
 
+import entidades.Cerimonia;
 import entidades.ProdutorDeMidia;
 import excecao.ExcecaoNegocio;
 import java.util.List;
@@ -65,6 +66,14 @@ public class ProdutorDeMidiaServico extends Servico
         return listar().contains(produtor);
     }
 
+    public List<ProdutorDeMidia> listarConvidadosDaCerimoniaAtual(Cerimonia c)
+    {
+        TypedQuery<ProdutorDeMidia> query = em.createQuery("SELECT c FROM ProdutorDeMidia c WHERE c.cerimonia = ?1", ProdutorDeMidia.class);
+        query.setParameter(1, c);
+        List<ProdutorDeMidia> produtor = query.getResultList();
+
+        return produtor;
+    }
     private boolean existente(String email)
     {
         TypedQuery<ProdutorDeMidia> query;

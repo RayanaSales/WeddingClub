@@ -50,7 +50,7 @@
         <p:tab  rendered="#{noivoBean.noivoLogado.cerimonia != null}" title="Equipe de Mídia" id="equipeMidia">
             <h:form id="formularioEquipeMidias">
                 <p:messages id="messagesEdicao" severity="error" autoUpdate="true" closable="true"/>
-                <p:dataTable id="tabelaProdutor" editable="true"  var="produtor" value="#{produtorDeMidiaBean.produtores}" paginator="true" rows="5" emptyMessage="Nenhum produtor cadastrado">
+                <p:dataTable id="tabelaProdutor" editable="true"  var="produtor" value="#{produtorDeMidiaBean.produtoresDaCerimonia}" paginator="true" rows="5" emptyMessage="Nenhum produtor cadastrado">
                     <f:facet name="header">Produtores</f:facet>
 
                     <p:ajax event="rowEdit" listener="#{produtorDeMidiaBean.editar}"  />

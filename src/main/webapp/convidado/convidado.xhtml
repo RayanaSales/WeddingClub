@@ -23,8 +23,6 @@
                     <p:outputLabel for="quantidadeSenhas" value="Quantidade de senhas: " />
                     <p:outputLabel id="quantidadeSenhas" value="#{convidadoBean.convidadoLogado.quantidadeSenhas}" />
 
-                    <p:outputLabel for="cerimonia" value="Cerimônia: " />
-                    <p:outputLabel id="cerimonia"  value="#{convidadoBean.verificaCerimoniaDoConvidadoLogado()}" />
                 </h:panelGrid>   
             </h:form>
         </p:tab>
@@ -32,12 +30,10 @@
 
             <p:outputLabel  for="localizacao" value="Localização:" />
             <p:outputLabel id="localizacao" value="#{convidadoBean.convidadoLogado.cerimonia.localizacao}" />
-
+            <br/><br/>
             <p:outputLabel for="dataHora" value="Data e Hora:" />
             <p:outputLabel id="dataHora" value="#{convidadoBean.convidadoLogado.cerimonia.dataHora}" />
-
-            <p:outputLabel for="buffet" value="Buffet: " />
-            <p:outputLabel id="buffet" value="#{convidadoBean.convidadoLogado.cerimonia.buffet}" />
+            <br/><br/>
 
             <!-- Dar um jeito de pegar os dados dos noivos da cerimônia -->
             

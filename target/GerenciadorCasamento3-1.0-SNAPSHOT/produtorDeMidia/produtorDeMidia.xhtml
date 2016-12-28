@@ -22,11 +22,21 @@
 
                     <p:outputLabel for="LinkredeSocial" value="Link para rede social: " />
                     <p:outputLabel id="LinkredeSocial" value="#{produtorDeMidiaBean.produtorLogado.linkParaRedeSocial}" />
-                    
-                    <p:outputLabel for="cerimonia" value="Cerimônia: " />
-                    <p:outputLabel id="cerimonia"  value="#{produtorDeMidiaBean.verificaCerimoniaDoProdutorLogado()}" />
+                 
                 </h:panelGrid>   
             </h:form>
+        </p:tab>
+        <p:tab rendered="#{produtorDeMidiaBean.produtorLogado.cerimonia != null}" title="Cerimônia">
+
+            <p:outputLabel  for="localizacao" value="Localização:" />
+            <p:outputLabel id="localizacao" value="#{produtorDeMidiaBean.produtorLogado.cerimonia.localizacao}" />
+            <br/><br/>
+            <p:outputLabel for="dataHora" value="Data e Hora:" />
+            <p:outputLabel id="dataHora" value="#{produtorDeMidiaBean.produtorLogado.cerimonia.dataHora}" />
+            <br/><br/>
+
+            <!-- Dar um jeito de pegar os dados dos noivos da cerimônia -->
+            
         </p:tab>
     </p:tabView>
 
