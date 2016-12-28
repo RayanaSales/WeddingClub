@@ -107,7 +107,7 @@ public class ProdutorDeMidiaBean implements Serializable
     
      public void salvarPublico()
     {
-         Noivo noivoAtual = (Noivo) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogado");
+         //Noivo noivoAtual = (Noivo) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogado");
        
         //criptografa senha
         String senha = produtor.getSenha();
